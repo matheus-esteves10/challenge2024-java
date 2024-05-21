@@ -2,7 +2,7 @@ package org.example.informacoesPessoais;
 
 import java.util.Date;
 
-public class PessoaCadastrada extends PessoaNaoCadastrada {
+public class PessoaCadastrada extends PessoaNaoCadastrada implements Validador {
     private String cpfInformado;
     private String senhaInformada;
     private ModeloVeiculo modeloVeiculo;
@@ -47,7 +47,8 @@ public class PessoaCadastrada extends PessoaNaoCadastrada {
         this.modeloVeiculo = modeloVeiculo;
     }
 
-    public boolean isCpfIgual(String cpfInformado){ //metodo criado para verificar se o cpf fornecido pelo usuario é igual o cpf cadastrado
+    @Override
+    public boolean isCpfValid(String cpfInformado){ //metodo criado para verificar se o cpf fornecido pelo usuario é igual o cpf cadastrado
         if (cpfInformado.equals(getCpf())){
             return true;
         } else {
@@ -56,12 +57,15 @@ public class PessoaCadastrada extends PessoaNaoCadastrada {
 
 
     }
-    public boolean isSenhaValida(String senhaInformada){ //metodo criado para verificar se a senha fornecida pelo usuario é igual a senha cadastrada
+   @Override
+    public boolean isSenhaValid(){ //metodo criado para verificar se a senha fornecida pelo usuario é igual a senha cadastrada
         if (senhaInformada.equals(getSenha())) {
             return true;
         } else {
             return false;
         }
+
+
 
 
     }

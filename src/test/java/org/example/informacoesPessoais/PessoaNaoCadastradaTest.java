@@ -13,13 +13,28 @@ class PessoaNaoCadastradaTest {
     PessoaNaoCadastrada pessoa = new PessoaNaoCadastrada("Carlos", dataNascimento, "044.464.790-24", "carlos@gmail.com", "1234", "1234", true);
 
     @Test
+    void teste_se_o_cpf_valido_retorna_true() {
+        Assertions.assertTrue(pessoa.isCpfValid("044.464.790-24"));
+    }
+
+    @Test
+    void teste_se_o_cpf_invalido_retorna_false(){
+        Assertions.assertFalse(pessoa.isCpfValid("12543253242"));
+    }
+
+
+    @Test
     void verifica_se_quando_senha_igual_retorna_true() {
-        Assertions.assertTrue(pessoa.isSenhaIgual("1234", "1234"));
+        pessoa.setConfirmarSenha("1234");
+        pessoa.setSenha("1234");
+        Assertions.assertTrue(pessoa.isSenhaValid());
     }
 
     @Test
     void verifica_se_quando_senha_diferente_retorna_false() {
-        Assertions.assertFalse(pessoa.isSenhaIgual("1234", "4321"));
+        pessoa.setConfirmarSenha("4321");
+        pessoa.setSenha("1234");
+        Assertions.assertFalse(pessoa.isSenhaValid());
     }
 
     @Test
