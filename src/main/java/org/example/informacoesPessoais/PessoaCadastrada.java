@@ -57,9 +57,9 @@ public class PessoaCadastrada extends PessoaNaoCadastrada implements Validador {
 
 
     }
-   @Override
-    public boolean isSenhaValid(){ //metodo criado para verificar se a senha fornecida pelo usuario é igual a senha cadastrada
-        if (senhaInformada.equals(getSenha())) {
+    @Override
+    public boolean isSenhaValid(String senha, String senhaInformada){ //metodo criado para verificar se a senha fornecida pelo usuario é igual a senha cadastrada
+        if (senhaInformada.equals(senha)) {
             return true;
         } else {
             return false;

@@ -21,7 +21,9 @@ public class PessoaNaoCadastrada implements Validador{
             throw new RuntimeException("O cpf é inválido");
         }
         this.email = email;
-        this.senha = senha;
+        if (isSenhaValid(senha, confirmarSenha)) {
+            this.senha = senha;
+        }
         this.asseguradoPorto = asseguradoPorto;
     }
 
@@ -119,7 +121,7 @@ public class PessoaNaoCadastrada implements Validador{
     }
 
     @Override
-    public boolean isSenhaValid() {
+    public boolean isSenhaValid(String senha, String confirmarSenha) {
         if (senha.equals(confirmarSenha))
             return true;
         else {

@@ -25,16 +25,12 @@ class PessoaNaoCadastradaTest {
 
     @Test
     void verifica_se_quando_senha_igual_retorna_true() {
-        pessoa.setConfirmarSenha("1234");
-        pessoa.setSenha("1234");
-        Assertions.assertTrue(pessoa.isSenhaValid());
+        Assertions.assertTrue(pessoa.isSenhaValid("1234", "1234"));
     }
 
     @Test
     void verifica_se_quando_senha_diferente_retorna_false() {
-        pessoa.setConfirmarSenha("4321");
-        pessoa.setSenha("1234");
-        Assertions.assertFalse(pessoa.isSenhaValid());
+        Assertions.assertFalse(pessoa.isSenhaValid("1234", "4321"));
     }
 
     @Test
