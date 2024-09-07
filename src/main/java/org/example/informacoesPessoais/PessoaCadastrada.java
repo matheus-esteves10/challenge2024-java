@@ -1,5 +1,6 @@
 package org.example.informacoesPessoais;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 public class PessoaCadastrada extends PessoaNaoCadastrada implements Validador {
@@ -7,7 +8,7 @@ public class PessoaCadastrada extends PessoaNaoCadastrada implements Validador {
     private String senhaInformada;
     private ModeloVeiculo modeloVeiculo;
 
-    public PessoaCadastrada(String nome, Date dataNacimento, String cpf, String email, String senha, String confirmarSenha, boolean asseguradoPorto, ModeloVeiculo modeloVeiculo) {
+    public PessoaCadastrada(String nome, LocalDate dataNacimento, String cpf, String email, String senha, String confirmarSenha, boolean asseguradoPorto, ModeloVeiculo modeloVeiculo) {
         super(nome, dataNacimento, cpf, email, senha, confirmarSenha, asseguradoPorto);
         this.modeloVeiculo = modeloVeiculo;
     }

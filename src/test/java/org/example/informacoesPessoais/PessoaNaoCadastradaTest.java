@@ -3,13 +3,14 @@ package org.example.informacoesPessoais;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class PessoaNaoCadastradaTest {
 
-    Date dataNascimento = new Date();
+    LocalDate dataNascimento = LocalDate.of(2000, 8, 1);
     PessoaNaoCadastrada pessoa = new PessoaNaoCadastrada("Carlos", dataNascimento, "044.464.790-24", "carlos@gmail.com", "1234", "1234", true);
 
     @Test

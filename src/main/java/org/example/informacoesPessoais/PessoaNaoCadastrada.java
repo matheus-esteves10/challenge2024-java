@@ -1,18 +1,20 @@
 package org.example.informacoesPessoais;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 public class PessoaNaoCadastrada implements Validador{
 
+    private Long id;
     private String nome;
-    private Date dataNacimento;
+    private LocalDate dataNacimento;
     private String cpf;
     private String email;
     private String senha;
     private String confirmarSenha;
     private boolean asseguradoPorto;
 
-    public PessoaNaoCadastrada(String nome, Date dataNacimento, String cpf, String email, String senha, String confirmarSenha, boolean asseguradoPorto) {
+    public PessoaNaoCadastrada(String nome, LocalDate dataNacimento, String cpf, String email, String senha, String confirmarSenha, boolean asseguradoPorto) {
         this.nome = nome;
         this.dataNacimento = dataNacimento;
         setCpf(cpf);
@@ -23,7 +25,7 @@ public class PessoaNaoCadastrada implements Validador{
         this.asseguradoPorto = asseguradoPorto;
     }
 
-    public PessoaNaoCadastrada(String nome, Date dataNacimento, String cpf, String email) {
+    public PessoaNaoCadastrada(String nome, LocalDate dataNacimento, String cpf, String email) {
         this.nome = nome;
         this.dataNacimento = dataNacimento;
         setCpf(cpf);
@@ -31,6 +33,14 @@ public class PessoaNaoCadastrada implements Validador{
     }
 
     public PessoaNaoCadastrada() {
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getNome() {
@@ -41,11 +51,11 @@ public class PessoaNaoCadastrada implements Validador{
         this.nome = nome;
     }
 
-    public Date getDataNacimento() {
+    public LocalDate getDataNacimento() {
         return dataNacimento;
     }
 
-    public void setDataNacimento(Date dataNacimento) {
+    public void setDataNacimento(LocalDate dataNacimento) {
         this.dataNacimento = dataNacimento;
     }
 
@@ -143,4 +153,11 @@ public class PessoaNaoCadastrada implements Validador{
         return false;
     }
 
+    @Override
+    public String toString() {
+        return "nome='" + nome + '\'' +
+                ", dataNacimento=" + dataNacimento +
+                ", cpf='" + cpf + '\'' +
+                ", email='" + email;
+    }
 }

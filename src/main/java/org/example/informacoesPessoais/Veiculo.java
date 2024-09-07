@@ -1,5 +1,6 @@
 package org.example.informacoesPessoais;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 public class Veiculo extends PessoaCadastrada {
@@ -8,7 +9,7 @@ public class Veiculo extends PessoaCadastrada {
     private String documentoVeiculo;
     private String placaVeiculo;
 
-    public Veiculo(String nome, Date dataNacimento, String cpf, String email, String senha, String confirmarSenha, boolean asseguradoPorto, ModeloVeiculo modeloVeiculo, String documentoVeiculo, String placaVeiculo) {
+    public Veiculo(String nome, LocalDate dataNacimento, String cpf, String email, String senha, String confirmarSenha, boolean asseguradoPorto, ModeloVeiculo modeloVeiculo, String documentoVeiculo, String placaVeiculo) {
         super(nome, dataNacimento, cpf, email, senha, confirmarSenha, asseguradoPorto, modeloVeiculo);
         this.documentoVeiculo = documentoVeiculo;
         this.placaVeiculo = placaVeiculo;
