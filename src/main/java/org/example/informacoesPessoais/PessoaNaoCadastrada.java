@@ -15,16 +15,19 @@ public class PessoaNaoCadastrada implements Validador{
     public PessoaNaoCadastrada(String nome, Date dataNacimento, String cpf, String email, String senha, String confirmarSenha, boolean asseguradoPorto) {
         this.nome = nome;
         this.dataNacimento = dataNacimento;
-        if (isCpfValid(cpf)) {
-            this.cpf = cpf;
-        } else {
-            throw new RuntimeException("O cpf é inválido");
-        }
+        setCpf(cpf);
         this.email = email;
         if (isSenhaValid(senha, confirmarSenha)) {
             this.senha = senha;
         }
         this.asseguradoPorto = asseguradoPorto;
+    }
+
+    public PessoaNaoCadastrada(String nome, Date dataNacimento, String cpf, String email) {
+        this.nome = nome;
+        this.dataNacimento = dataNacimento;
+        setCpf(cpf);
+        this.email = email;
     }
 
     public PessoaNaoCadastrada() {
@@ -51,7 +54,11 @@ public class PessoaNaoCadastrada implements Validador{
     }
 
     public void setCpf(String cpf) {
-        this.cpf = cpf;
+        if (isCpfValid(cpf)) {
+            this.cpf = cpf;
+        } else {
+            throw new RuntimeException("O cpf é inválido");
+        }
     }
 
     public String getEmail() {
