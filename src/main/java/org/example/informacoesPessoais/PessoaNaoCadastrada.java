@@ -25,7 +25,8 @@ public class PessoaNaoCadastrada implements Validador{
         this.asseguradoPorto = asseguradoPorto;
     }
 
-    public PessoaNaoCadastrada(String nome, LocalDate dataNacimento, String cpf, String email) {
+    public PessoaNaoCadastrada(Long id, String nome, LocalDate dataNacimento, String cpf, String email) {
+        this.id = id;
         this.nome = nome;
         this.dataNacimento = dataNacimento;
         setCpf(cpf);
@@ -155,9 +156,7 @@ public class PessoaNaoCadastrada implements Validador{
 
     @Override
     public String toString() {
-        return "nome='" + nome + '\'' +
-                ", dataNacimento=" + dataNacimento +
-                ", cpf='" + cpf + '\'' +
-                ", email='" + email;
+        return "id=" + id + '\'' +
+                "nome='" + nome + '\'' + ", dataNacimento=" + dataNacimento + ", cpf='" + cpf + '\'' + ", email='" + email;
     }
 }

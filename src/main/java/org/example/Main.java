@@ -5,7 +5,6 @@ import org.example.informacoesPessoais.PessoaNaoCadastrada;
 
 import java.sql.SQLException;
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
 
 public class Main {
@@ -16,26 +15,26 @@ public class Main {
                 "RM554769",
                 "160805");
 
-
-        PessoaNaoCadastrada pessoa = new PessoaNaoCadastrada("Caio", LocalDate.of(2005, 12, 28), "93480504000", "caio@fiap.com.br");
-
+        PessoaNaoCadastrada pessoa = new PessoaNaoCadastrada(3L, "Excluido", LocalDate.of(2005, 10, 20), "53154691820", "gabriel@fiap.com");
         IPessoaNaoCadastrada pessoaDao = new PessoaDaoImp(db.getConnection());
 
         //create
-//        pessoaDao.create(pessoa);
+        //pessoaDao.create(pessoa);
 
-        //read -OK
-//        List<PessoaNaoCadastrada> pessoas = pessoaDao.readAll();
-//        for (PessoaNaoCadastrada pessoaSalva : pessoas) {
-//            System.out.println(pessoaSalva.toString());
+        //read
+//        List<PessoaNaoCadastrada> cadastrados= pessoaDao.readAll();
+//
+//        for(PessoaNaoCadastrada user : cadastrados){
+//            System.out.println(user.toString());
 //        }
 
         //update
-        pessoa.setNome("Joao");
-        pessoaDao.update(pessoa);
+//        pessoa.setNome("Gabriel Falanga");
+//        pessoaDao.update(pessoa);
 
-        //delete - OK
-        //pessoaDao.delete(2l);
+        //delete
+        pessoaDao.delete(3l);
+
     }
 }
 

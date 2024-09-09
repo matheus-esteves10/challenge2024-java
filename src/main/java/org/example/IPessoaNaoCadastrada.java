@@ -3,6 +3,7 @@ package org.example;
 import org.example.informacoesPessoais.PessoaNaoCadastrada;
 
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.List;
 
 public interface IPessoaNaoCadastrada {
