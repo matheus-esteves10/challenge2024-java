@@ -17,11 +17,7 @@ public class Veiculo extends PessoaCadastrada {
 
     public Veiculo(String documentoVeiculo, String placaVeiculo) {
         this.documentoVeiculo = documentoVeiculo;
-        if (isPlacaValida(placaVeiculo)) {
-            this.placaVeiculo = placaVeiculo;
-        } else {
-            throw new RuntimeException("Placa inválida");
-        }
+        setPlacaVeiculo(placaVeiculo);
 
     }
 
@@ -38,7 +34,11 @@ public class Veiculo extends PessoaCadastrada {
     }
 
     public void setPlacaVeiculo(String placaVeiculo) {
-        this.placaVeiculo = placaVeiculo;
+        if(isPlacaValida(placaVeiculo)) {
+            this.placaVeiculo = placaVeiculo;
+        } else {
+            throw new RuntimeException("Placa inválida");
+        }
     }
 
     public boolean isPlacaValida(String placaVeiculo) {

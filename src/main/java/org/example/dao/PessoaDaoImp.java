@@ -1,5 +1,6 @@
-package org.example;
+package org.example.dao;
 
+import org.example.dao.IPessoaNaoCadastrada;
 import org.example.informacoesPessoais.PessoaNaoCadastrada;
 
 import java.sql.*;
@@ -7,8 +8,9 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PessoaDaoImp implements IPessoaNaoCadastrada{
+public class PessoaDaoImp implements IPessoaNaoCadastrada {
     private final Connection connection;
+    private PreparedStatement pstm;
 
     public PessoaDaoImp(Connection connection) {
         this.connection = connection;
@@ -19,7 +21,7 @@ public class PessoaDaoImp implements IPessoaNaoCadastrada{
     public void create(PessoaNaoCadastrada pessoa) throws SQLException {
         String sql = "INSERT INTO t_atc_usuario (ID_USUARIO, NM_USUARIO, DT_NASCIMENTO, NR_CPF, NM_EMAIL) VALUES (?, ?, ?, ?, ?)";
 
-        PreparedStatement pstm = connection.prepareStatement(sql);
+        pstm = connection.prepareStatement(sql);
         pstm.setLong(1, pessoa.getId());
         pstm.setString(2, pessoa.getNome());
         pstm.setDate(3, Date.valueOf(pessoa.getDataNacimento()));
@@ -49,7 +51,7 @@ public class PessoaDaoImp implements IPessoaNaoCadastrada{
     @Override
     public void update(PessoaNaoCadastrada pessoa) throws SQLException {
         String sql = "UPDATE t_atc_usuario set NM_USUARIO = ?, DT_NASCIMENTO = ?, NR_CPF = ?, NM_EMAIL = ? WHERE ID_USUARIO = ?";
-        PreparedStatement pstm = connection.prepareStatement(sql);
+        pstm = connection.prepareStatement(sql);
         pstm.setString(1, pessoa.getNome());
         pstm.setDate(2, Date.valueOf(pessoa.getDataNacimento()));
         pstm.setString(3, pessoa.getCpf());
@@ -62,7 +64,7 @@ public class PessoaDaoImp implements IPessoaNaoCadastrada{
     @Override
     public void delete(Long id) throws SQLException {
         String sql = "DELETE from t_atc_usuario WHERE ID_USUARIO=?";
-        PreparedStatement pstm = connection.prepareStatement(sql);
+        pstm = connection.prepareStatement(sql);
         pstm.setLong(1, id);
         pstm.executeUpdate();
     }

@@ -1,4 +1,4 @@
-package org.example;
+package org.example.dao;
 
 import org.example.informacoesPessoais.PessoaNaoCadastrada;
 

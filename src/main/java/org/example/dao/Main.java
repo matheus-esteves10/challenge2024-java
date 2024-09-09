@@ -1,11 +1,12 @@
-package org.example;
+package org.example.dao;
 
 import org.example.config.DatabaseConfig;
+import org.example.dao.IPessoaNaoCadastrada;
+import org.example.dao.PessoaDaoImp;
 import org.example.informacoesPessoais.PessoaNaoCadastrada;
 
 import java.sql.SQLException;
 import java.time.LocalDate;
-import java.util.List;
 
 public class Main {
     public static void main(String[] args) throws SQLException {
