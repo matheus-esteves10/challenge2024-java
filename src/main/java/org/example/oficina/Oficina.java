@@ -1,14 +1,18 @@
 package org.example.oficina;
 
+import java.util.List;
+
 public class Oficina {
+    private Long id;
     private String nomeOficina;
     private String cidadeOficina;
     private String enderecoOficina;
     private String cnpjOficina;
-    private String mecanicos;
+    private List<String> mecanicos;
 
 
-    public Oficina(String nomeOficina, String cidadeOficina, String enderecoOficina, String cnpjOficina) {
+    public Oficina(Long id, String nomeOficina, String cidadeOficina, String enderecoOficina, String cnpjOficina) {
+        this.id = id;
         this.nomeOficina = nomeOficina;
         this.cidadeOficina = cidadeOficina;
         this.enderecoOficina = enderecoOficina;
@@ -17,6 +21,14 @@ public class Oficina {
 
     public Oficina() {
 
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getNomeOficina() {
@@ -51,15 +63,18 @@ public class Oficina {
         this.cnpjOficina = cnpjOficina;
     }
 
-    public String getMecanicos() {
-        return mecanicos;
-    }
-
-    public void setMecanicos(String mecanicos) {
-        this.mecanicos = mecanicos;
-    }
-
     public void verificarCnpj(String cnpjOficina){
         //
+    }
+
+    @Override
+    public String toString() {
+        return "Oficina{" +
+                "id=" + id +
+                ", nomeOficina='" + nomeOficina + '\'' +
+                ", cidadeOficina='" + cidadeOficina + '\'' +
+                ", enderecoOficina='" + enderecoOficina + '\'' +
+                ", cnpjOficina='" + cnpjOficina + '\'' +
+                '}';
     }
 }

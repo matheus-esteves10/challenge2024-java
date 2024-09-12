@@ -1,12 +1,11 @@
-package org.example.dao;
+package org.example.daoPessoa;
 
 import org.example.config.DatabaseConfig;
-import org.example.dao.IPessoaNaoCadastrada;
-import org.example.dao.PessoaDaoImp;
 import org.example.informacoesPessoais.PessoaNaoCadastrada;
 
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.List;
 
 public class Main {
     public static void main(String[] args) throws SQLException {
@@ -20,18 +19,18 @@ public class Main {
         IPessoaNaoCadastrada pessoaDao = new PessoaDaoImp(db.getConnection());
 
         //create
-        //pessoaDao.create(pessoa);
+        pessoaDao.create(pessoa);
 
         //read
-//        List<PessoaNaoCadastrada> cadastrados= pessoaDao.readAll();
-//
-//        for(PessoaNaoCadastrada user : cadastrados){
-//            System.out.println(user.toString());
-//        }
+        List<PessoaNaoCadastrada> cadastrados= pessoaDao.readAll();
+
+        for(PessoaNaoCadastrada user : cadastrados){
+            System.out.println(user.toString());
+        }
 
         //update
-//        pessoa.setNome("Gabriel Falanga");
-//        pessoaDao.update(pessoa);
+        pessoa.setNome("Gabriel Falanga");
+        pessoaDao.update(pessoa);
 
         //delete
         pessoaDao.delete(3l);

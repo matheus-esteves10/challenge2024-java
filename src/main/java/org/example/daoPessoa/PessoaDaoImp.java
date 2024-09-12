@@ -1,6 +1,5 @@
-package org.example.dao;
+package org.example.daoPessoa;
 
-import org.example.dao.IPessoaNaoCadastrada;
 import org.example.informacoesPessoais.PessoaNaoCadastrada;
 
 import java.sql.*;

@@ -9,8 +9,8 @@ public class Pecas extends Oficina{
 
 
 
-    public Pecas(String nomeOficina, String cidadeOficina, String enderecoOficina, String cnpjOficina) {
-        super(nomeOficina, cidadeOficina, enderecoOficina, cnpjOficina);
+    public Pecas(Long id, String nomeOficina, String cidadeOficina, String enderecoOficina, String cnpjOficina) {
+        super(id, nomeOficina, cidadeOficina, enderecoOficina, cnpjOficina);
     }
 
     public String getModeloPeca() {

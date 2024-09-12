@@ -1,9 +1,8 @@
-package org.example.dao;
+package org.example.daoPessoa;
 
 import org.example.informacoesPessoais.PessoaNaoCadastrada;
 
 import java.sql.SQLException;
-import java.time.LocalDate;
 import java.util.List;
 
 public interface IPessoaNaoCadastrada {

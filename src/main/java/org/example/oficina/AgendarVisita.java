@@ -13,8 +13,8 @@ public class AgendarVisita extends Oficina {
 
 
 
-    public AgendarVisita(String nomeOficina, String cidadeOficina, String enderecoOficina, String cnpjOficina) {
-        super(nomeOficina, cidadeOficina, enderecoOficina, cnpjOficina);
+    public AgendarVisita(Long id, String nomeOficina, String cidadeOficina, String enderecoOficina, String cnpjOficina) {
+        super(id, nomeOficina, cidadeOficina, enderecoOficina, cnpjOficina);
     }
 
     public Date getDataAgendamento() {
@@ -68,7 +68,7 @@ public class AgendarVisita extends Oficina {
     }
 
     public void valorVisita(){ //metodo para valor do serviço
-        //
+
     }
 
 }

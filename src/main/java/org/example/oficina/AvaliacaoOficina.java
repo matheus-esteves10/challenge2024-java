@@ -8,8 +8,8 @@ public class AvaliacaoOficina extends Oficina{
     private int notaOficina;
 
 
-    public AvaliacaoOficina(String nomeOficina, String cidadeOficina, String enderecoOficina, String cnpjOficina) {
-        super(nomeOficina, cidadeOficina, enderecoOficina, cnpjOficina);
+    public AvaliacaoOficina(Long id, String nomeOficina, String cidadeOficina, String enderecoOficina, String cnpjOficina) {
+        super(id, nomeOficina, cidadeOficina, enderecoOficina, cnpjOficina);
     }
 
     public AvaliacaoOficina(int quantidadeDeAvaliacoes, int somaNotaDasAvaliacoes) {
