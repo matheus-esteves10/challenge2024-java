@@ -8,7 +8,7 @@ public class Oficina {
     private String cidadeOficina;
     private String enderecoOficina;
     private String cnpjOficina;
-    private List<String> mecanicos;
+    private List<Agendamentos> agendamentos;
 
 
     public Oficina(Long id, String nomeOficina, String cidadeOficina, String enderecoOficina, String cnpjOficina) {

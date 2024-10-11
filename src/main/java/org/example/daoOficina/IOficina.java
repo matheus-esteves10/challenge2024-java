@@ -1,6 +1,5 @@
 package org.example.daoOficina;
 
-import org.example.informacoesPessoais.PessoaNaoCadastrada;
 import org.example.oficina.Oficina;
 
 import java.sql.SQLException;

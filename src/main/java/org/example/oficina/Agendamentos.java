@@ -3,7 +3,7 @@ package org.example.oficina;
 import java.time.LocalTime;
 import java.util.Date;
 
-public class AgendarVisita extends Oficina {
+public class Agendamentos extends Oficina {
     private Date dataAgendamento;
     private LocalTime horaDoAgendamento;
     private String mecanicoAgendado;
@@ -13,7 +13,7 @@ public class AgendarVisita extends Oficina {
 
 
 
-    public AgendarVisita(Long id, String nomeOficina, String cidadeOficina, String enderecoOficina, String cnpjOficina) {
+    public Agendamentos(Long id, String nomeOficina, String cidadeOficina, String enderecoOficina, String cnpjOficina) {
         super(id, nomeOficina, cidadeOficina, enderecoOficina, cnpjOficina);
     }
 

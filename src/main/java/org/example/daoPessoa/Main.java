@@ -1,7 +1,7 @@
 package org.example.daoPessoa;
 
 import org.example.config.DatabaseConfig;
-import org.example.informacoesPessoais.PessoaNaoCadastrada;
+import org.example.informacoesPessoais.Pessoa;
 
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -15,16 +15,16 @@ public class Main {
                 "RM554769",
                 "160805");
 
-        PessoaNaoCadastrada pessoa = new PessoaNaoCadastrada(3L, "Excluido", LocalDate.of(2005, 10, 20), "53154691820", "gabriel@fiap.com");
+        Pessoa pessoa = new Pessoa(3L, "Excluido", LocalDate.of(2005, 10, 20), "53154691820", "gabriel@fiap.com");
         IPessoaNaoCadastrada pessoaDao = new PessoaDaoImp(db.getConnection());
 
         //create
         pessoaDao.create(pessoa);
 
         //read
-        List<PessoaNaoCadastrada> cadastrados= pessoaDao.readAll();
+        List<Pessoa> cadastrados= pessoaDao.readAll();
 
-        for(PessoaNaoCadastrada user : cadastrados){
+        for(Pessoa user : cadastrados){
             System.out.println(user.toString());
         }
 

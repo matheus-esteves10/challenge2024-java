@@ -3,14 +3,17 @@ package org.example.informacoesPessoais;
 import java.time.LocalDate;
 import java.util.Date;
 
-public class Veiculo extends PessoaCadastrada {
-    //informações do carro já estendida da classe PessoaCadastrada
+public class Veiculo extends Pessoa {
 
+    private Long id;
+    private String marca;
+    private String ano;
+    private String modelo;
     private String documentoVeiculo;
     private String placaVeiculo;
 
-    public Veiculo(String nome, LocalDate dataNacimento, String cpf, String email, String senha, String confirmarSenha, boolean asseguradoPorto, ModeloVeiculo modeloVeiculo, String documentoVeiculo, String placaVeiculo) {
-        super(nome, dataNacimento, cpf, email, senha, confirmarSenha, asseguradoPorto, modeloVeiculo);
+    public Veiculo(String nome, LocalDate dataNacimento, String cpf, String email, String senha, String confirmarSenha, String documentoVeiculo, String placaVeiculo) {
+        super(nome, dataNacimento, cpf, email, senha);
         this.documentoVeiculo = documentoVeiculo;
         this.placaVeiculo = placaVeiculo;
     }

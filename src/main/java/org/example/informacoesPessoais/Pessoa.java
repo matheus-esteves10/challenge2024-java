@@ -1,9 +1,9 @@
 package org.example.informacoesPessoais;
 
 import java.time.LocalDate;
-import java.util.Date;
+import java.util.List;
 
-public class PessoaNaoCadastrada implements Validador{
+public class Pessoa implements Validador{
 
     private Long id;
     private String nome;
@@ -12,20 +12,22 @@ public class PessoaNaoCadastrada implements Validador{
     private String email;
     private String senha;
     private String confirmarSenha;
-    private boolean asseguradoPorto;
+    private List<Veiculo> veiculos; //adicionar no database
 
-    public PessoaNaoCadastrada(String nome, LocalDate dataNacimento, String cpf, String email, String senha, String confirmarSenha, boolean asseguradoPorto) {
+
+    public Pessoa(String nome, LocalDate dataNacimento, String cpf, String email, String senha) {
         this.nome = nome;
         this.dataNacimento = dataNacimento;
         setCpf(cpf);
         this.email = email;
         if (isSenhaValid(senha, confirmarSenha)) {
             this.senha = senha;
+        } else {
+            new RuntimeException("senha diferente de confirmar senha");
         }
-        this.asseguradoPorto = asseguradoPorto;
     }
 
-    public PessoaNaoCadastrada(Long id, String nome, LocalDate dataNacimento, String cpf, String email) {
+    public Pessoa(Long id, String nome, LocalDate dataNacimento, String cpf, String email) {
         this.id = id;
         this.nome = nome;
         this.dataNacimento = dataNacimento;
@@ -33,7 +35,7 @@ public class PessoaNaoCadastrada implements Validador{
         this.email = email;
     }
 
-    public PessoaNaoCadastrada() {
+    public Pessoa() {
     }
 
     public Long getId() {
@@ -88,16 +90,20 @@ public class PessoaNaoCadastrada implements Validador{
         this.senha = senha;
     }
 
-    public void setAsseguradoPorto(boolean asseguradoPorto) {
-        this.asseguradoPorto = asseguradoPorto;
-    }
-
     public String getConfirmarSenha() {
         return confirmarSenha;
     }
 
     public void setConfirmarSenha(String confirmarSenha) {
         this.confirmarSenha = confirmarSenha;
+    }
+
+    public List<Veiculo> getVeiculos() {
+        return veiculos;
+    }
+
+    public void setVeiculos(List<Veiculo> veiculos) {
+        this.veiculos = veiculos;
     }
 
     @Override
@@ -145,13 +151,6 @@ public class PessoaNaoCadastrada implements Validador{
         else {
             return false;
         }
-    }
-
-    public boolean isAsseguradoPorto(boolean asseguradoPorto){ //verificar se o usuario é assegurado Porto
-        if (asseguradoPorto){
-            return true;
-        }
-        return false;
     }
 
     @Override

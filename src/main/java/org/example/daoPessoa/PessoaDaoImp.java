@@ -1,6 +1,6 @@
 package org.example.daoPessoa;
 
-import org.example.informacoesPessoais.PessoaNaoCadastrada;
+import org.example.informacoesPessoais.Pessoa;
 
 import java.sql.*;
 import java.time.LocalDate;
@@ -17,7 +17,7 @@ public class PessoaDaoImp implements IPessoaNaoCadastrada {
 
 
     @Override
-    public void create(PessoaNaoCadastrada pessoa) throws SQLException {
+    public void create(Pessoa pessoa) throws SQLException {
         String sql = "INSERT INTO t_atc_usuario (ID_USUARIO, NM_USUARIO, DT_NASCIMENTO, NR_CPF, NM_EMAIL) VALUES (?, ?, ?, ?, ?)";
 
         pstm = connection.prepareStatement(sql);
@@ -30,8 +30,8 @@ public class PessoaDaoImp implements IPessoaNaoCadastrada {
     }
 
     @Override
-    public List<PessoaNaoCadastrada> readAll() throws SQLException {
-        List<PessoaNaoCadastrada> resultado = new ArrayList<>();
+    public List<Pessoa> readAll() throws SQLException {
+        List<Pessoa> resultado = new ArrayList<>();
         String sql = "SELECT * FROM t_atc_usuario";
         Statement statement = connection.createStatement();
         ResultSet rs = statement.executeQuery(sql);
@@ -42,13 +42,13 @@ public class PessoaDaoImp implements IPessoaNaoCadastrada {
             LocalDate dataNasc = rs.getDate("DT_NASCIMENTO").toLocalDate();
             String cpf = rs.getString("NR_CPF");
             String email = rs.getString("NM_EMAIL");
-            resultado.add(new PessoaNaoCadastrada(id, nome, dataNasc, cpf,email));
+            resultado.add(new Pessoa(id, nome, dataNasc, cpf,email));
         }
         return resultado;
     }
 
     @Override
-    public void update(PessoaNaoCadastrada pessoa) throws SQLException {
+    public void update(Pessoa pessoa) throws SQLException {
         String sql = "UPDATE t_atc_usuario set NM_USUARIO = ?, DT_NASCIMENTO = ?, NR_CPF = ?, NM_EMAIL = ? WHERE ID_USUARIO = ?";
         pstm = connection.prepareStatement(sql);
         pstm.setString(1, pessoa.getNome());
