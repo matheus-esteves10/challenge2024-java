@@ -1,5 +1,7 @@
 package org.example.model.informacoesPessoais;
 
+import org.example.model.oficina.Agendamentos;
+
 import java.time.LocalDate;
 import java.util.List;
 
@@ -12,7 +14,9 @@ public class Pessoa implements Validador{
     private String email;
     private String senha;
     private String confirmarSenha;
-    private List<Veiculo> veiculos; //adicionar no database
+    private List<Veiculo> veiculos;
+    private List<Agendamentos> agendamentos;
+
 
 
     public Pessoa(String nome, LocalDate dataNacimento, String cpf, String email, String senha) {
@@ -104,6 +108,14 @@ public class Pessoa implements Validador{
 
     public void setVeiculos(List<Veiculo> veiculos) {
         this.veiculos = veiculos;
+    }
+
+    public List<Agendamentos> getAgendamentos() {
+        return agendamentos;
+    }
+
+    public void setAgendamentos(List<Agendamentos> agendamentos) {
+        this.agendamentos = agendamentos;
     }
 
     @Override

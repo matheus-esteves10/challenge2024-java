@@ -10,6 +10,7 @@ public class Veiculo extends Pessoa {
     private String modelo;
     private String documentoVeiculo;
     private String placaVeiculo;
+    private String descricaoAgendamento;
 
     public Veiculo(String nome, LocalDate dataNacimento, String cpf, String email, String senha, String confirmarSenha, String documentoVeiculo, String placaVeiculo) {
         super(nome, dataNacimento, cpf, email, senha);
