@@ -1,7 +1,7 @@
 package org.example.daoOficina;
 
 import org.example.config.DatabaseConfig;
-import org.example.oficina.Oficina;
+import org.example.model.oficina.Oficina;
 
 import java.sql.SQLException;
 import java.util.List;

@@ -1,4 +1,4 @@
-package org.example.oficina;
+package org.example.model.oficina;
 
 import java.time.LocalTime;
 import java.util.Date;

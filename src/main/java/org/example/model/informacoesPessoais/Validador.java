@@ -1,4 +1,4 @@
-package org.example.informacoesPessoais;
+package org.example.model.informacoesPessoais;
 
 public interface Validador {
         boolean isCpfValid(String cpf);

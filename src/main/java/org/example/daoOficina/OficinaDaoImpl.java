@@ -1,6 +1,6 @@
 package org.example.daoOficina;
 
-import org.example.oficina.Oficina;
+import org.example.model.oficina.Oficina;
 
 import java.sql.*;
 import java.util.ArrayList;

@@ -1,4 +1,4 @@
-package org.example.informacoesPessoais;
+package org.example.model.informacoesPessoais;
 
 import java.time.LocalDate;
 import java.util.List;

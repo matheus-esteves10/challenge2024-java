@@ -1,7 +1,7 @@
 package org.example.daoPessoa;
 
 import org.example.config.DatabaseConfig;
-import org.example.informacoesPessoais.Pessoa;
+import org.example.model.informacoesPessoais.Pessoa;
 
 import java.sql.SQLException;
 import java.time.LocalDate;

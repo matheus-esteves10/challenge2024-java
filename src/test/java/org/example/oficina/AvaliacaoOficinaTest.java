@@ -1,9 +1,8 @@
 package org.example.oficina;
 
+import org.example.model.oficina.AvaliacaoOficina;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class AvaliacaoOficinaTest {
 

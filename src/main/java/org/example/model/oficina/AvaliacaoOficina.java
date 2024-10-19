@@ -1,4 +1,4 @@
-package org.example.oficina;
+package org.example.model.oficina;
 
 public class AvaliacaoOficina extends Oficina{
     private String comentariosOficina;

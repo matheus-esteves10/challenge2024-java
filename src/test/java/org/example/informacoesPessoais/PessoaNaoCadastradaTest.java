@@ -1,5 +1,6 @@
 package org.example.informacoesPessoais;
 
+import org.example.model.informacoesPessoais.Pessoa;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
