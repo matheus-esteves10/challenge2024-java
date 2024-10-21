@@ -18,14 +18,12 @@ public class OficinaDaoImpl implements IOficina{
 
     @Override
     public void create(Oficina oficina) throws SQLException {
-        String sql = "INSERT INTO t_atc_oficina (id_oficina, nr_cnpj, nm_cidade, nm_endereco, nm_oficina) VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO t_atc_oficina (nm_oficina, nm_cidade, endereco, nr_cnpj) VALUES (?, ?, ?, ?)";
         pstm = connection.prepareStatement(sql);
-
-        pstm.setLong(1, oficina.getId());
-        pstm.setString(2, oficina.getCnpjOficina());
-        pstm.setString(3, oficina.getCidadeOficina());
-        pstm.setString(4, oficina.getEnderecoOficina());
-        pstm.setString(5, oficina.getNomeOficina());
+        pstm.setString(1, oficina.getNomeOficina());
+        pstm.setString(2, oficina.getCidadeOficina());
+        pstm.setString(3, oficina.getEnderecoOficina());
+        pstm.setString(4, oficina.getCnpjOficina());
         pstm.executeUpdate();
     }
 
@@ -40,7 +38,7 @@ public class OficinaDaoImpl implements IOficina{
            Long id = rs.getLong("id_oficina");
            String nomeOficina = rs.getString("nm_oficina");
            String cidadeOficina = rs.getString("nm_cidade");
-           String enderecoOficina = rs.getString("nm_endereco");
+           String enderecoOficina = rs.getString("endereco");
            String cnpj = rs.getString("nr_cnpj");
 
            resultado.add(new Oficina(id, nomeOficina, cidadeOficina, enderecoOficina, cnpj));
@@ -50,7 +48,7 @@ public class OficinaDaoImpl implements IOficina{
 
     @Override
     public void update(Oficina oficina) throws SQLException {
-        String sql = "UPDATE t_atc_oficina set nr_cnpj = ?, nm_cidade = ?, nm_endereco = ?, nm_oficina = ? WHERE id_oficina = ?";
+        String sql = "UPDATE t_atc_oficina set nr_cnpj = ?, nm_cidade = ?, endereco = ?, nm_oficina = ? WHERE id_oficina = ?";
         pstm = connection.prepareStatement(sql);
 
         pstm.setString(1, oficina.getCnpjOficina());

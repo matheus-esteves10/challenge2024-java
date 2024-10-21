@@ -18,7 +18,7 @@ public class PessoaDaoImp implements IPessoaNaoCadastrada {
 
     @Override
     public void create(Pessoa pessoa) throws SQLException {
-        String sql = "INSERT INTO t_atc_usuario (NM_USUARIO, DT_NASC, NR_CPF, NM_EMAIL, NM_SENHA) VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO t_atc_usuario (NM_USUARIO, DT_NASCIMENTO, NR_CPF, NM_EMAIL, NM_SENHA) VALUES (?, ?, ?, ?, ?)";
 
         pstm = connection.prepareStatement(sql);
         pstm.setString(1, pessoa.getNome());
@@ -39,7 +39,7 @@ public class PessoaDaoImp implements IPessoaNaoCadastrada {
         while (rs.next()) { //metodo que verifica se tem um próximo item
             Long id = rs.getLong("ID_USUARIO");
             String nome = rs.getString("NM_USUARIO");
-            LocalDate dataNasc = rs.getDate("DT_NASC").toLocalDate();
+            LocalDate dataNasc = rs.getDate("DT_NASCIMENTO").toLocalDate();
             String cpf = rs.getString("NR_CPF");
             String email = rs.getString("NM_EMAIL");
             String senha = rs.getString("NM_SENHA");
@@ -50,7 +50,7 @@ public class PessoaDaoImp implements IPessoaNaoCadastrada {
 
     @Override
     public void update(Pessoa pessoa) throws SQLException {
-        String sql = "UPDATE t_atc_usuario set NM_USUARIO = ?, DT_NASC = ?, NR_CPF = ?, NM_EMAIL = ?, NM_SENHA = ? WHERE ID_USUARIO = ?";
+        String sql = "UPDATE t_atc_usuario set NM_USUARIO = ?, DT_NASCIMENTO = ?, NR_CPF = ?, NM_EMAIL = ?, NM_SENHA = ? WHERE ID_USUARIO = ?";
         pstm = connection.prepareStatement(sql);
         pstm.setString(1, pessoa.getNome());
         pstm.setDate(2, Date.valueOf(pessoa.getDataNacimento()));

@@ -19,13 +19,6 @@ public class Oficina {
         this.cnpjOficina = cnpjOficina;
     }
 
-    public Oficina(String nomeOficina, String cidadeOficina, String enderecoOficina, String cnpjOficina) {
-        this.nomeOficina = nomeOficina;
-        this.cidadeOficina = cidadeOficina;
-        this.enderecoOficina = enderecoOficina;
-        this.cnpjOficina = cnpjOficina;
-    }
-
     public Oficina() {
 
     }

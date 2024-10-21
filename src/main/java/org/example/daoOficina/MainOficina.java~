@@ -21,19 +21,19 @@ public class MainOficina {
 //        oficinaDao.create(oficina);
 
         //update
-//        oficina.setId(1l);
-//        oficina.setNomeOficina("Oficina do Betinho ");
-//        oficinaDao.update(oficina);
+        oficina.setId(1l);
+        oficina.setNomeOficina("Oficina do Betinho ");
+        oficinaDao.update(oficina);
 
         //read
-//        List<Oficina> oficinas = oficinaDao.readAll();
-//
-//        for (Oficina oficinaNova: oficinas){
-//            System.out.println(oficinaNova.toString());
-//        }
+        List<Oficina> oficinas = oficinaDao.readAll();
+
+        for (Oficina oficinaNova: oficinas){
+            System.out.println(oficinaNova.toString());
+        }
 
         //delete
-       oficinaDao.delete(1l);
+//        oficinaDao.delete(2l);
 
     }
 }

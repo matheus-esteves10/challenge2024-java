@@ -19,7 +19,7 @@ public class Pessoa implements Validador{
 
 
 
-    public Pessoa(String nome, LocalDate dataNacimento, String cpf, String email, String senha) {
+    public Pessoa(String nome, LocalDate dataNacimento, String cpf, String email, String senha, String confirmarSenha) {
         this.nome = nome;
         this.dataNacimento = dataNacimento;
         setCpf(cpf);
@@ -31,12 +31,17 @@ public class Pessoa implements Validador{
         }
     }
 
-    public Pessoa(Long id, String nome, LocalDate dataNacimento, String cpf, String email) {
+    public Pessoa(Long id, String nome, LocalDate dataNacimento, String cpf, String email, String senha) {
         this.id = id;
         this.nome = nome;
         this.dataNacimento = dataNacimento;
         setCpf(cpf);
         this.email = email;
+        if (isSenhaValid(senha, confirmarSenha)) {
+            this.senha = senha;
+        } else {
+            new RuntimeException("senha diferente de confirmar senha");
+        }
     }
 
     public Pessoa() {

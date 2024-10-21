@@ -35,7 +35,7 @@ public class Main {
 //        pessoaDao.update(pessoa);
 
         //delete
-//        pessoaDao.delete(3l);
+        pessoaDao.delete(3l);
 
     }
 }
