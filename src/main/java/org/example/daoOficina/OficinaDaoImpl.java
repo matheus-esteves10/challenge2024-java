@@ -6,7 +6,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class OficinaDaoImpl implements IOficina{
+public class OficinaDaoImpl implements OficinaDao {
 
     private final Connection connection;
     private PreparedStatement pstm;

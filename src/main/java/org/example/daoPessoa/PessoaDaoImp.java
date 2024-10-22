@@ -7,9 +7,13 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PessoaDaoImp implements IPessoaNaoCadastrada {
-    private final Connection connection;
+public class PessoaDaoImp implements PessoaNaoCadastradaDao {
+    private Connection connection;
     private PreparedStatement pstm;
+
+
+    public PessoaDaoImp() {
+    }
 
     public PessoaDaoImp(Connection connection) {
         this.connection = connection;

@@ -6,9 +6,9 @@ import java.sql.SQLException;
 
 public class DatabaseConfig {
 
-    private String url;
-    private String user;
-    private String password;
+    private final String url;
+    private final String user;
+    private final String password;
     private Connection connection;
 
     public DatabaseConfig(String url, String user, String password) {

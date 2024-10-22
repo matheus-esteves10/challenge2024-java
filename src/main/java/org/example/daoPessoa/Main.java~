@@ -17,17 +17,17 @@ public class Main {
 
 
         Pessoa pessoa = new Pessoa("Gabriel", LocalDate.of(2005, 10, 20), "53154691820", "gabriel@fiap.com", "123456", "123456");
-        IPessoaNaoCadastrada pessoaDao = new PessoaDaoImp(db.getConnection());
+        PessoaNaoCadastradaDao pessoaDao = new PessoaDaoImp(db.getConnection());
 
         //create
         //pessoaDao.create(pessoa);
 
         //read
-//        List<Pessoa> cadastrados= pessoaDao.readAll();
-//
-//        for(Pessoa user : cadastrados){
-//            System.out.println(user.toString());
-//        }
+        List<Pessoa> cadastrados= pessoaDao.readAll();
+
+        for(Pessoa user : cadastrados){
+            System.out.println(user.toString());
+        }
 
         //update
 //        pessoa.setId(3l);
@@ -35,7 +35,7 @@ public class Main {
 //        pessoaDao.update(pessoa);
 
         //delete
-        pessoaDao.delete(3l);
+//        pessoaDao.delete(3l);
 
     }
 }

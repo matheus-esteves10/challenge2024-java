@@ -5,7 +5,7 @@ import org.example.model.informacoesPessoais.Pessoa;
 import java.sql.SQLException;
 import java.util.List;
 
-public interface IPessoaNaoCadastrada {
+public interface PessoaNaoCadastradaDao {
     //create
     void create (Pessoa pessoa) throws SQLException;
 

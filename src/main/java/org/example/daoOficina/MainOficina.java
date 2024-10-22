@@ -4,7 +4,6 @@ import org.example.config.DatabaseConfig;
 import org.example.model.oficina.Oficina;
 
 import java.sql.SQLException;
-import java.util.List;
 
 public class MainOficina {
     public static void main(String[] args) throws SQLException {
@@ -15,7 +14,7 @@ public class MainOficina {
                 "160805");
 
         Oficina oficina = new Oficina("Oficina do Joao", "SP", "Rua Conselheiro Carrão 139","31950061000143");
-        IOficina oficinaDao = new OficinaDaoImpl(db.getConnection());
+        OficinaDao oficinaDao = new OficinaDaoImpl(db.getConnection());
 
         //create
 //        oficinaDao.create(oficina);
