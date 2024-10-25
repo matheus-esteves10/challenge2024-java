@@ -27,22 +27,35 @@ public class PessoaDaoImp implements PessoaDao {
 
     @Override
     public Pessoa save(Pessoa pessoa, Connection connection) throws SQLException, PessoaNotSavedException {
-        String sql = "BEGIN INSERT INTO t_atc_usuario (NM_USUARIO, DT_NASC, NR_CPF, NM_EMAIL, NM_SENHA) VALUES (?, ?, ?, ?, ?) RETURNING ID INTO ?; END;";
+        String sql = "BEGIN INSERT INTO t_atc_usuario (NM_USUARIO, DT_NASC, NR_CPF, NM_EMAIL, NM_SENHA) VALUES (?, ?, ?, ?, ?) RETURNING ID_USUARIO INTO ?; END;";
         CallableStatement call = connection.prepareCall(sql);
 
+        // Definindo os parâmetros de entrada (IN)
         call.setString(1, pessoa.getNome());
         call.setDate(2, Date.valueOf(pessoa.getDataNacimento()));
         call.setString(3, pessoa.getCpf());
         call.setString(4, pessoa.getEmail());
         call.setString(5, pessoa.getSenha());
-        int linhasAlteradas = call.executeUpdate();
+
+        // Registrando o parâmetro de saída (OUT) para o ID gerado
+        call.registerOutParameter(6, java.sql.Types.BIGINT);
+
+        // Executando o comando
+        call.execute();
+
+        // Recuperando o ID gerado
         long id = call.getLong(6);
-        if(linhasAlteradas == 0 || id == 0){
+
+        if (id == 0) {
             throw new PessoaNotSavedException();
         }
+
+        // Atualizando o objeto com o ID gerado
         pessoa.setId(id);
+
         return pessoa;
     }
+
 
     @Override
     public List<Pessoa> readAll() {

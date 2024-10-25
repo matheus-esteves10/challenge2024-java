@@ -32,7 +32,7 @@ public class CadastroPessoaController {
                         .build();
             } catch (SQLException | PessoaNotSavedException e){
                 return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
-                        .entity(Map.of("mensagem","erro inesperado ao tentar inserir pessoa")).build();
+                        .entity(Map.of("mensagem","erro inesperado ao tentar inserir pessoa: " + e)).build();
             }
 
         } else {

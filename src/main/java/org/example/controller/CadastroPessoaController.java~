@@ -46,7 +46,7 @@ public class CadastroPessoaController {
     }
 
     @GET
-    @Path("/all-cadastros")
+    @Path("/all")
     @Produces(MediaType.APPLICATION_JSON)
     public Response findAll() {
         return Response.status(Response.Status.OK)

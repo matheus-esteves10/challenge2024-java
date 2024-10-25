@@ -1,6 +1,18 @@
 package org.example.dto;
 
-import java.time.LocalDate;
+import org.example.model.informacoesPessoais.Veiculo;
+import org.example.model.oficina.Agendamentos;
 
-public record PessoaDto(Long id, String nome, LocalDate dataNacimento,String cpf, String email, String senha) {
+import java.time.LocalDate;
+import java.util.List;
+
+public record PessoaDto(Long id,
+                        String nome,
+                        LocalDate dataNacimento,
+                        String cpf,
+                        String email,
+                        String senha,
+                        String confirmarSenha,
+                        List<Veiculo> veiculos,
+                        List<Agendamentos> agendamentos) {
 }
