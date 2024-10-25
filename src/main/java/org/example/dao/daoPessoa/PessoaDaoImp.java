@@ -1,8 +1,9 @@
 package org.example.dao.daoPessoa;
 
 import org.example.config.DatabaseConnectionFactory;
-import org.example.exceptions.PessoaNotFoundException;
-import org.example.exceptions.PessoaNotSavedException;
+import org.example.dao.Dao;
+import org.example.exceptions.NotFoundException;
+import org.example.exceptions.NotSavedException;
 import org.example.model.informacoesPessoais.Pessoa;
 
 import java.sql.*;
@@ -11,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
-public class PessoaDaoImp implements PessoaDao {
+public class PessoaDaoImp implements Dao<Pessoa> {
     private Connection connection;
 
     private final Logger logger = Logger.getLogger(this.getClass().getName());
@@ -26,7 +27,7 @@ public class PessoaDaoImp implements PessoaDao {
 
 
     @Override
-    public Pessoa save(Pessoa pessoa, Connection connection) throws SQLException, PessoaNotSavedException {
+    public Pessoa save(Pessoa pessoa, Connection connection) throws SQLException, NotSavedException {
         String sql = "BEGIN INSERT INTO t_atc_usuario (NM_USUARIO, DT_NASC, NR_CPF, NM_EMAIL, NM_SENHA) VALUES (?, ?, ?, ?, ?) RETURNING ID_USUARIO INTO ?; END;";
         CallableStatement call = connection.prepareCall(sql);
 
@@ -47,7 +48,7 @@ public class PessoaDaoImp implements PessoaDao {
         long id = call.getLong(6);
 
         if (id == 0) {
-            throw new PessoaNotSavedException();
+            throw new NotSavedException();
         }
 
         // Atualizando o objeto com o ID gerado
@@ -80,7 +81,7 @@ public class PessoaDaoImp implements PessoaDao {
     }
 
     @Override
-    public Pessoa update(Pessoa pessoa, Connection connection) throws PessoaNotFoundException, SQLException {
+    public Pessoa update(Pessoa pessoa, Connection connection) throws NotFoundException, SQLException {
         final String sql = "UPDATE t_atc_usuario set NM_USUARIO = ?, DT_NASC = ?, NR_CPF = ?, NM_EMAIL = ?, NM_SENHA = ? WHERE ID_USUARIO = ?";
 
         PreparedStatement stmt = connection.prepareStatement(sql);
@@ -92,19 +93,19 @@ public class PessoaDaoImp implements PessoaDao {
         stmt.setLong(6, pessoa.getId());
         int linhasAlteradas = stmt.executeUpdate();
         if(linhasAlteradas == 0 ) {
-            throw new PessoaNotFoundException();
+            throw new NotFoundException();
         }
         return pessoa;
     }
 
     @Override
-    public void deleteById(Long id, Connection connection) throws SQLException, PessoaNotFoundException {
+    public void deleteById(Long id, Connection connection) throws SQLException, NotFoundException {
         final String sql = "DELETE from t_atc_usuario WHERE ID_USUARIO=?";
         PreparedStatement stmt = connection.prepareStatement(sql);
         stmt.setLong(1, id);
         int linhasAlteradas = stmt.executeUpdate();
         if(linhasAlteradas == 0) {
-            throw new PessoaNotFoundException();
+            throw new NotFoundException();
         }
     }
 

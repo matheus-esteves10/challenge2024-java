@@ -1,4 +1,4 @@
-package org.example.service.pessoa;
+package org.example.service.oficina;
 
 import org.example.config.DatabaseConnectionFactory;
 import org.example.dao.Dao;
@@ -6,25 +6,25 @@ import org.example.dao.daoPessoa.PessoaDaoFactory;
 import org.example.exceptions.NotFoundException;
 import org.example.exceptions.NotSavedException;
 import org.example.exceptions.UnsupportedServiceOperationException;
-import org.example.model.informacoesPessoais.Pessoa;
+import org.example.model.oficina.Oficina;
 import org.example.service.Service;
 
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
-final class PessoaServiceImpl implements Service<Pessoa> {
+public class OficinaServiceImpl implements Service<Oficina> {
 
     private final Dao dao = PessoaDaoFactory.create();
 
     @Override
-    public Pessoa create(Pessoa pessoa) throws UnsupportedServiceOperationException, SQLException, NotSavedException {
-        if (pessoa.getId() == null) {
+    public Oficina create(Oficina oficina) throws UnsupportedServiceOperationException, SQLException, NotSavedException {
+        if (oficina.getId() == null) {
             Connection connection = DatabaseConnectionFactory.create().get();
             try {
-                pessoa = (Pessoa) this.dao.save(pessoa, connection);
+                oficina = (Oficina) this.dao.save(oficina, connection);
                 connection.commit();
-                return pessoa;
+                return oficina;
             } catch (SQLException | NotSavedException e) {
                 connection.rollback();
                 throw e;
@@ -35,17 +35,16 @@ final class PessoaServiceImpl implements Service<Pessoa> {
     }
 
     @Override
-    public List<Pessoa> findAll() {
+    public List<Oficina> findAll() {
         return this.dao.readAll();
     }
 
-
     @Override
-    public Pessoa update(Pessoa pessoa) throws NotFoundException, SQLException {
+    public Oficina update(Oficina oficina) throws NotFoundException, SQLException {
         Connection connection = DatabaseConnectionFactory.create().get();
-        pessoa = (Pessoa) this.dao.update(pessoa, connection);
+        oficina = (Oficina) this.dao.update(oficina, connection);
         connection.commit();
-        return pessoa;
+        return oficina;
     }
 
     @Override

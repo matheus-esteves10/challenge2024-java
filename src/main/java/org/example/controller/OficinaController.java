@@ -1,12 +1,12 @@
 package org.example.controller;
 
-import org.example.dto.PessoaDto;
+import org.example.dto.OficinaDto;
 import org.example.exceptions.NotFoundException;
 import org.example.exceptions.NotSavedException;
 import org.example.exceptions.UnsupportedServiceOperationException;
-import org.example.model.informacoesPessoais.Pessoa;
+import org.example.model.oficina.Oficina;
 import org.example.service.Service;
-import org.example.service.pessoa.PessoaServiceFactory;
+import org.example.service.oficina.OficinaServiceFactory;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -14,25 +14,35 @@ import javax.ws.rs.core.Response;
 import java.sql.SQLException;
 import java.util.Map;
 
-@Path("/cadastro")
-public class CadastroPessoaController {
-    private final Service pessoaService = PessoaServiceFactory.create();
+
+@Path("/oficina")
+public class OficinaController {
+
+    private final Service oficinaService = OficinaServiceFactory.create();
+
+    @GET
+    @Path("/all")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response findAll() {
+        return Response.status(Response.Status.OK)
+                .entity(this.oficinaService.findAll()).build();
+    }
 
     @POST
     @Path("")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response add(PessoaDto input) throws UnsupportedServiceOperationException {
+    public Response add(OficinaDto input) throws UnsupportedServiceOperationException {
         if (input.id() == null) {
             try {
-                Pessoa pessoa = (Pessoa) this.pessoaService.create(new Pessoa(null, input.nome(), input.dataNacimento(),input.cpf(),input.email(),input.senha()));
+                Oficina oficina = (Oficina) this.oficinaService.create(new Oficina(null, input.nomeOficina(), input.cidadeOficina(),input.enderecoOficina(),input.cnpjOficina()));
                 return Response
                         .status(Response.Status.CREATED)
-                        .entity(pessoa)
+                        .entity(oficina)
                         .build();
             } catch (SQLException | NotSavedException e){
                 return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
-                        .entity(Map.of("mensagem","erro inesperado ao tentar inserir pessoa: " + e)).build();
+                        .entity(Map.of("mensagem","erro inesperado ao tentar inserir oficina: " + e)).build();
             }
 
         } else {
@@ -40,32 +50,24 @@ public class CadastroPessoaController {
                     .entity(
                             Map.of(
                                     "mensagem",
-                                    "esse método só permite a criação de novas pessoas"))
+                                    "esse método só permite a criação de novas oficinas"))
                     .build();
         }
-    }
-
-    @GET
-    @Path("/all")
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response findAll() {
-        return Response.status(Response.Status.OK)
-                .entity(this.pessoaService.findAll()).build();
     }
 
     @PUT
     @Path("/{id}")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response update(@PathParam("id") Long id, PessoaDto input){
+    public Response update(@PathParam("id") Long id, OficinaDto input){
         try {
-            Pessoa updated = (Pessoa) this.pessoaService.update(new Pessoa(id, input.nome(), input.dataNacimento(),input.cpf(),input.email(),input.senha()));
+            Oficina updated = (Oficina) this.oficinaService.update(new Oficina(id, input.nomeOficina(), input.cidadeOficina(),input.enderecoOficina(),input.cnpjOficina()));
             return Response.status(Response.Status.OK).entity(updated).build();
         } catch (NotFoundException e) {
             return Response.status(Response.Status.NOT_FOUND).build();
         } catch (SQLException s) {
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
-                    .entity(Map.of("mensagem","erro inesperado ao tentar atualizar pessoa")).build();
+                    .entity(Map.of("mensagem","erro inesperado ao tentar atualizar oficina")).build();
         }
     }
 
@@ -73,15 +75,13 @@ public class CadastroPessoaController {
     @Path("/{id}")
     public Response delete(@PathParam("id")Long id){
         try {
-            this.pessoaService.deleteById(id);
+            this.oficinaService.deleteById(id);
             return Response.status(Response.Status.NO_CONTENT).build();
         } catch (NotFoundException e) {
             return Response.status(Response.Status.NOT_FOUND).build();
         } catch (SQLException s) {
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
-                    .entity(Map.of("mensagem","erro inesperado ao tentar deletar pessoa")).build();
+                    .entity(Map.of("mensagem","erro inesperado ao tentar deletar oficina")).build();
         }
     }
-
-
 }
