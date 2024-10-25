@@ -1,4 +1,4 @@
-package org.example.daoOficina;
+package org.example.dao.daoOficina;
 
 import org.example.model.oficina.Oficina;
 

@@ -16,7 +16,7 @@ public class Pessoa implements Validador{
     private String confirmarSenha;
     private List<Veiculo> veiculos;
     private List<Agendamentos> agendamentos;
-
+    
     public Pessoa(Long id, String nome, LocalDate dataNacimento, String cpf, String email, String senha) {
         this.id = id;
         this.nome = nome;

@@ -11,9 +11,8 @@ public class Veiculo extends Pessoa {
     private String documentoVeiculo;
     private String placaVeiculo;
 
-
-    public Veiculo(String nome, LocalDate dataNacimento, String cpf, String email, String senha, String confirmarSenha, String documentoVeiculo, String placaVeiculo) {
-        super(nome, dataNacimento, cpf, email, senha, confirmarSenha);
+    public Veiculo(Long id, String nome, LocalDate dataNacimento, String cpf, String email, String senha, String documentoVeiculo, String placaVeiculo) {
+        super(id, nome, dataNacimento, cpf, email, senha);
         this.documentoVeiculo = documentoVeiculo;
         this.placaVeiculo = placaVeiculo;
     }
