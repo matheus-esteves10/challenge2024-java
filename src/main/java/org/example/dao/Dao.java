@@ -14,6 +14,8 @@ public interface Dao<T> {
     // Read
     List<T> readAll();
 
+    T readById(Long id) throws NotFoundException;
+
     // Update
     T update(T entity, Connection connection) throws NotFoundException, SQLException;
 

@@ -40,7 +40,7 @@ final class PessoaServiceImpl implements Service<Pessoa> {
     }
 
     @Override
-    public Pessoa findById(Long id) throws NotFoundException {
+    public Pessoa readById(Long id) throws NotFoundException {
         return (Pessoa) this.dao.readById(id);
     }
 

@@ -21,12 +21,35 @@ public class OficinaController {
     private final Service oficinaService = OficinaServiceFactory.create();
 
     @GET
-    @Path("/all")
+    @Path("")
     @Produces(MediaType.APPLICATION_JSON)
     public Response findAll() {
         return Response.status(Response.Status.OK)
                 .entity(this.oficinaService.findAll()).build();
     }
+
+    @GET
+    @Path("/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response findById(@PathParam("id") Long id) {
+        if (id == null || id <= 0) {
+            return Response.status(Response.Status.BAD_REQUEST)
+                    .entity(Map.of("mensagem", "ID inválido fornecido"))
+                    .build();
+        }
+        try {
+            Oficina oficina = (Oficina) this.oficinaService.findById(id);
+            return Response.status(Response.Status.OK)
+                    .entity(oficina)
+                    .build();
+        } catch (NotFoundException e) {
+            return Response.status(Response.Status.NOT_FOUND)
+                    .entity(Map.of("mensagem", "Oficina não encontrada para o ID fornecido"))
+                    .build();
+        }
+    }
+
+
 
     @POST
     @Path("")

@@ -29,11 +29,11 @@ public class OficinaDaoImpl implements Dao<Oficina> {
             call.setString(4, oficina.getCnpjOficina());
 
             // Registro do parâmetro de saída
-            call.registerOutParameter(5, java.sql.Types.BIGINT);
+            call.registerOutParameter(1, java.sql.Types.BIGINT);
 
             call.execute();
 
-            long id = call.getLong(5);
+            long id = call.getLong(1);
             if (id == 0) {
                 throw new NotSavedException();
             }
@@ -62,6 +62,29 @@ public class OficinaDaoImpl implements Dao<Oficina> {
             logger.warning("não foi possível localizar nenhum registro de pessoa: "+e.getMessage());
         }
         return resultado;
+    }
+
+    @Override
+    public Oficina readById(Long id) throws NotFoundException {
+        final String sql = "SELECT * FROM t_atc_oficina WHERE id_oficina = ?";
+        try (Connection connection = DatabaseConnectionFactory.create().get();
+             PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setLong(1, id);
+            try(ResultSet rs = stmt.executeQuery()) {
+                if(rs.next()) {
+                    String nomeOficina = rs.getString("nm_oficina");
+                    String cidadeOficina = rs.getString("nm_cidade");
+                    String enderecoOficina = rs.getString("endereco");
+                    String cnpj = rs.getString("nr_cnpj");
+                    return new Oficina(id, nomeOficina, cidadeOficina, enderecoOficina, cnpj);
+                } else {
+                    throw new NotFoundException();
+                }
+            }
+        } catch (SQLException e) {
+            logger.warning("Erro ao localizar oficina: " + e.getMessage());
+            throw new RuntimeException("Erro de banco de dados ao buscar oficina por ID.", e);
+        }
     }
 
 

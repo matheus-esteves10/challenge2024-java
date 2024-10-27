@@ -82,7 +82,7 @@ public class PessoaDaoImp implements Dao<Pessoa> {
 
     @Override
     public Pessoa readById(Long id) throws NotFoundException {
-        final String sql = "SELECT * FROM t_atc_usuario WHERE ID_USUARIO = ?";
+        final String sql = "SELECT * FROM t_atc_usuario WHERE NM_EMAIL = ? AND NM_SENHA = ?";
         try (Connection connection = DatabaseConnectionFactory.create().get();
              PreparedStatement stmt = connection.prepareStatement(sql)) {
 

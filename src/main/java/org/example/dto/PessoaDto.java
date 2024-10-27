@@ -11,8 +11,5 @@ public record PessoaDto(Long id,
                         LocalDate dataNacimento,
                         String cpf,
                         String email,
-                        String senha,
-                        String confirmarSenha,
-                        List<Veiculo> veiculos,
-                        List<Agendamentos> agendamentos) {
+                        String senha) {
 }

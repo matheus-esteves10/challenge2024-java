@@ -13,6 +13,8 @@ public interface Service <T>{
 
     List<T> findAll();
 
+    T findById(Long id) throws NotFoundException;
+
     T update(T entity) throws NotFoundException, SQLException;
 
     void deleteById(Long id) throws NotFoundException, SQLException;

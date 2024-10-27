@@ -40,6 +40,11 @@ public class OficinaServiceImpl implements Service<Oficina> {
     }
 
     @Override
+    public Oficina findById(Long id) throws NotFoundException {
+        return (Oficina) this.dao.readById(id);
+    }
+
+    @Override
     public Oficina update(Oficina oficina) throws NotFoundException, SQLException {
         Connection connection = DatabaseConnectionFactory.create().get();
         oficina = (Oficina) this.dao.update(oficina, connection);
