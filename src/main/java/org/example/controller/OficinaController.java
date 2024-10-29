@@ -18,7 +18,7 @@ import java.util.Map;
 @Path("/oficina")
 public class OficinaController {
 
-    private final Service oficinaService = OficinaServiceFactory.create();
+    private final Service<Oficina> oficinaService = OficinaServiceFactory.create();
 
     @GET
     @Path("")

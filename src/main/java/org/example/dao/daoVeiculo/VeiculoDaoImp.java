@@ -114,7 +114,7 @@ public class VeiculoDaoImp implements Dao<Veiculo> {
 
     @Override
     public Veiculo update(Veiculo veiculo, Connection connection) throws NotFoundException, SQLException {
-        final String sql = "UPDATE t_atc_veiculo SET nm_marca = ?, nm_modelo = ?, nr_ano = ?, nr_standard = ?, nr_placa = ?, id_usuario = ? WHERE id_veiculo = ?";
+        final String sql = "UPDATE t_atc_veiculo SET nm_marca = ?, nm_modelo = ?, nr_ano = ?, nr_standard = ?, nr_placa = ? WHERE id_usuario = ?";
         PreparedStatement stmt = connection.prepareStatement(sql);
         stmt.setString(1, veiculo.getMarca());
         stmt.setString(2, veiculo.getModelo());
@@ -122,7 +122,6 @@ public class VeiculoDaoImp implements Dao<Veiculo> {
         stmt.setString(4, veiculo.getDocumentoVeiculo());
         stmt.setString(5, veiculo.getPlacaVeiculo());
         stmt.setLong(6, veiculo.getIdPessoa());
-        stmt.setLong(7, veiculo.getId());
         int linhasAlteradas = stmt.executeUpdate();
         if(linhasAlteradas == 0 ) {
             throw new NotFoundException();

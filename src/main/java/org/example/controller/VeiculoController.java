@@ -1,12 +1,14 @@
 package org.example.controller;
 
 import org.example.dto.PessoaDto;
+import org.example.dto.VeiculoDto;
 import org.example.exceptions.NotFoundException;
 import org.example.exceptions.NotSavedException;
 import org.example.exceptions.UnsupportedServiceOperationException;
 import org.example.model.informacoesPessoais.Pessoa;
+import org.example.model.informacoesPessoais.Veiculo;
 import org.example.service.Service;
-import org.example.service.pessoa.PessoaServiceFactory;
+import org.example.service.veiculo.VeiculoServiceFactory;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -14,25 +16,26 @@ import javax.ws.rs.core.Response;
 import java.sql.SQLException;
 import java.util.Map;
 
-@Path("/cadastro")
-public class PessoaController {
-    private final Service<Pessoa> pessoaService = PessoaServiceFactory.create();
+@Path("/veiculo")
+public class VeiculoController {
+
+    private final Service<Veiculo> veiculoService = VeiculoServiceFactory.create();
 
     @POST
     @Path("")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response add(PessoaDto input) throws UnsupportedServiceOperationException {
+    public Response add(VeiculoDto input) throws UnsupportedServiceOperationException {
         if (input.id() == null) {
             try {
-                Pessoa pessoa = (Pessoa) this.pessoaService.create(new Pessoa(null, input.nome(), input.dataNacimento(),input.cpf(),input.email(),input.senha()));
+                Veiculo veiculo = (Veiculo) this.veiculoService.create(new Veiculo(null, input.marca(), input.modelo(), input.ano(), input.documentoVeiculo(), input.placaVeiculo(), input.idPessoa()));
                 return Response
                         .status(Response.Status.CREATED)
-                        .entity(pessoa)
+                        .entity(veiculo)
                         .build();
-            } catch (SQLException | NotSavedException e){
+            } catch (SQLException | NotSavedException e) {
                 return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
-                        .entity(Map.of("mensagem","erro inesperado ao tentar inserir pessoa: " + e)).build();
+                        .entity(Map.of("mensagem", "erro inesperado ao tentar inserir veiculo: " + e)).build();
             }
 
         } else {
@@ -40,7 +43,7 @@ public class PessoaController {
                     .entity(
                             Map.of(
                                     "mensagem",
-                                    "esse método só permite a criação de novas pessoas"))
+                                    "esse método só permite a criação de novos veiculos"))
                     .build();
         }
     }
@@ -50,7 +53,7 @@ public class PessoaController {
     @Produces(MediaType.APPLICATION_JSON)
     public Response findAll() {
         return Response.status(Response.Status.OK)
-                .entity(this.pessoaService.findAll()).build();
+                .entity(this.veiculoService.findAll()).build();
     }
 
     @GET
@@ -59,7 +62,7 @@ public class PessoaController {
     public Response findById(@PathParam("id") Long id) {
         try {
             return Response.status(Response.Status.OK)
-                    .entity(this.pessoaService.findById(id)).build();
+                    .entity(this.veiculoService.findById(id)).build();
         } catch (NotFoundException e) {
             return Response.status(Response.Status.NOT_FOUND).build();
         }
@@ -69,15 +72,15 @@ public class PessoaController {
     @Path("/{id}")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response update(@PathParam("id") Long id, PessoaDto input){
+    public Response update(@PathParam("id") Long id, VeiculoDto input){
         try {
-            Pessoa updated = (Pessoa) this.pessoaService.update(new Pessoa(id, input.nome(), input.dataNacimento(),input.cpf(),input.email(),input.senha()));
+            Veiculo updated = (Veiculo) this.veiculoService.update(new Veiculo(null, input.marca(), input.modelo(), input.ano(), input.documentoVeiculo(), input.placaVeiculo(), input.idPessoa()));
             return Response.status(Response.Status.OK).entity(updated).build();
         } catch (NotFoundException e) {
             return Response.status(Response.Status.NOT_FOUND).build();
         } catch (SQLException s) {
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
-                    .entity(Map.of("mensagem","erro inesperado ao tentar atualizar pessoa")).build();
+                    .entity(Map.of("mensagem","erro inesperado ao tentar atualizar veiculo")).build();
         }
     }
 
@@ -85,15 +88,13 @@ public class PessoaController {
     @Path("/{id}")
     public Response delete(@PathParam("id")Long id){
         try {
-            this.pessoaService.deleteById(id);
+            this.veiculoService.deleteById(id);
             return Response.status(Response.Status.NO_CONTENT).build();
         } catch (NotFoundException e) {
             return Response.status(Response.Status.NOT_FOUND).build();
         } catch (SQLException s) {
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
-                    .entity(Map.of("mensagem","erro inesperado ao tentar deletar pessoa")).build();
+                    .entity(Map.of("mensagem","erro inesperado ao tentar deletar veiculo")).build();
         }
     }
-
-
 }
