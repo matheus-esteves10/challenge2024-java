@@ -2,12 +2,13 @@ ENDPOINT GERAL:
 
 ENDPOINTS CADASTRO:
     GET: /cadastro/all
+    GET BY ID: /cadastro/{id}
     POST: /cadastro
-    PUT: /cadastro/id
-    DELETE: /cadastro/id
+    PUT: /cadastro/{id}
+    DELETE: /cadastro/{id}
 
 ENDPOINTS OFICINA:
     GET: /oficina/all
     POST: /oficina
-    PUT: /oficina/id
-    DELETE: /oficina/id
+    PUT: /oficina/{id}
+    DELETE: /oficina/{id}

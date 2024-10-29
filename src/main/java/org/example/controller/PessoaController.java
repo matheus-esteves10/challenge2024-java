@@ -54,7 +54,7 @@ public class PessoaController {
     }
 
     @GET
-    @Path("/get/{id}")
+    @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response findById(@PathParam("id") Long id) {
         try {

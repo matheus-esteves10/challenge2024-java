@@ -26,8 +26,6 @@ public class Pessoa implements Validador{
         this.senha = senha;
     }
 
-
-
     public Pessoa() {
     }
 
