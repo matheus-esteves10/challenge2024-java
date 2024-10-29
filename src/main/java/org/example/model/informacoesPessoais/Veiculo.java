@@ -10,6 +10,7 @@ public class Veiculo extends Pessoa {
     private String modelo;
     private String documentoVeiculo;
     private String placaVeiculo;
+    private Long idPessoa;
 
     public Veiculo(Long id, String nome, LocalDate dataNacimento, String cpf, String email, String senha, String documentoVeiculo, String placaVeiculo) {
         super(id, nome, dataNacimento, cpf, email, senha);
@@ -21,6 +22,58 @@ public class Veiculo extends Pessoa {
         this.documentoVeiculo = documentoVeiculo;
         setPlacaVeiculo(placaVeiculo);
 
+    }
+
+    public Veiculo(Long id, String marca, String ano, String modelo, String documentoVeiculo, String placaVeiculo, Long idPessoa) {
+        this.id = id;
+        this.marca = marca;
+        this.ano = ano;
+        this.modelo = modelo;
+        this.documentoVeiculo = documentoVeiculo;
+        this.placaVeiculo = placaVeiculo;
+        this.idPessoa = idPessoa;
+    }
+
+    public Long getIdPessoa() {
+        return idPessoa;
+    }
+
+    public void setIdPessoa(Long idPessoa) {
+        this.idPessoa = idPessoa;
+    }
+
+    @Override
+    public Long getId() {
+        return id;
+    }
+
+    @Override
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getMarca() {
+        return marca;
+    }
+
+    public void setMarca(String marca) {
+        this.marca = marca;
+    }
+
+    public String getAno() {
+        return ano;
+    }
+
+    public void setAno(String ano) {
+        this.ano = ano;
+    }
+
+    public String getModelo() {
+        return modelo;
+    }
+
+    public void setModelo(String modelo) {
+        this.modelo = modelo;
     }
 
     public String getDocumentoVeiculo() {
