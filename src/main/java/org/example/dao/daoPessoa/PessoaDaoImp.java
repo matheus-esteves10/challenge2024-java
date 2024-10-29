@@ -39,7 +39,7 @@ public class PessoaDaoImp implements Dao<Pessoa> {
         call.setString(5, pessoa.getSenha());
 
         // Registrando o parâmetro de saída (OUT) para o ID gerado
-        call.registerOutParameter(1, java.sql.Types.BIGINT);
+        call.registerOutParameter(6, java.sql.Types.NUMERIC);
 
         // Executando o comando
         call.execute();
@@ -56,6 +56,7 @@ public class PessoaDaoImp implements Dao<Pessoa> {
 
         return pessoa;
     }
+
 
 
     @Override

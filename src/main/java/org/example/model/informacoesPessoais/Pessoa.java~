@@ -23,10 +23,25 @@ public class Pessoa implements Validador{
         this.dataNacimento = dataNacimento;
         setCpf(cpf);
         this.email = email;
-        this.senha = senha;
+        if (isSenhaValid(senha, confirmarSenha)) {
+            this.senha = senha;
+        } else {
+            new RuntimeException("senha diferente de confirmar senha");
+        }
     }
 
-
+    public Pessoa(Long id, String nome, LocalDate dataNacimento, String cpf, String email, String senha, String confirmarSenha) {
+        this.id = id;
+        this.nome = nome;
+        this.dataNacimento = dataNacimento;
+        setCpf(cpf);
+        this.email = email;
+        if (isSenhaValid(senha, confirmarSenha)) {
+            this.senha = senha;
+        } else {
+            new RuntimeException("senha diferente de confirmar senha");
+        }
+    }
 
     public Pessoa() {
     }
