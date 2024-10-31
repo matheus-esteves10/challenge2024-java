@@ -72,15 +72,15 @@ public class VeiculoController {
     @Path("/{id}")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response update(@PathParam("id") Long id, VeiculoDto input){
+    public Response update(@PathParam("id") Long idPessoa, VeiculoDto input){
         try {
-            Veiculo updated = (Veiculo) this.veiculoService.update(new Veiculo(null, input.marca(), input.modelo(), input.ano(), input.documentoVeiculo(), input.placaVeiculo(), input.idPessoa()));
+            Veiculo updated = (Veiculo) this.veiculoService.update(new Veiculo(input.id(), input.marca(), input.modelo(), input.ano(), input.documentoVeiculo(), input.placaVeiculo(), idPessoa));
             return Response.status(Response.Status.OK).entity(updated).build();
         } catch (NotFoundException e) {
             return Response.status(Response.Status.NOT_FOUND).build();
         } catch (SQLException s) {
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
-                    .entity(Map.of("mensagem","erro inesperado ao tentar atualizar veiculo")).build();
+                    .entity(Map.of("mensagem","erro inesperado ao tentar atualizar veiculo" + s)).build();
         }
     }
 

@@ -4,11 +4,9 @@ import org.example.config.DatabaseConnectionFactory;
 import org.example.dao.Dao;
 import org.example.exceptions.NotFoundException;
 import org.example.exceptions.NotSavedException;
-import org.example.model.informacoesPessoais.Pessoa;
 import org.example.model.oficina.Oficina;
 
 import java.sql.*;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
@@ -20,7 +18,8 @@ public class OficinaDaoImpl implements Dao<Oficina> {
 
     @Override
     public Oficina save(Oficina oficina, Connection connection) throws SQLException, NotSavedException {
-        String sql = "{CALL INSERT INTO t_atc_oficina (nm_oficina, nm_cidade, endereco, nr_cnpj) VALUES (?, ?, ?, ?) RETURNING ID_USUARIO INTO ?}";
+
+        String sql = "BEGIN INSERT INTO t_atc_oficina (nm_oficina, nm_cidade, endereco, nr_cnpj) VALUES (?, ?, ?, ?) RETURNING ID_OFICINA INTO ?; END;";
 
         try (CallableStatement call = connection.prepareCall(sql)) {
             call.setString(1, oficina.getNomeOficina());
@@ -28,17 +27,16 @@ public class OficinaDaoImpl implements Dao<Oficina> {
             call.setString(3, oficina.getEnderecoOficina());
             call.setString(4, oficina.getCnpjOficina());
 
-            // Registro do parâmetro de saída
-            call.registerOutParameter(1, java.sql.Types.BIGINT);
-
+            call.registerOutParameter(5, java.sql.Types.NUMERIC);
             call.execute();
 
-            long id = call.getLong(1);
+            long id = call.getLong(5);
+
             if (id == 0) {
                 throw new NotSavedException();
             }
-
             oficina.setId(id);
+
             return oficina;
         }
     }

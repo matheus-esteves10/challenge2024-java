@@ -2,20 +2,19 @@ package org.example.service.oficina;
 
 import org.example.config.DatabaseConnectionFactory;
 import org.example.dao.Dao;
-import org.example.dao.daoPessoa.PessoaDaoFactory;
+import org.example.dao.daoOficina.OficinaDaoFactory;
 import org.example.exceptions.NotFoundException;
 import org.example.exceptions.NotSavedException;
 import org.example.exceptions.UnsupportedServiceOperationException;
 import org.example.model.oficina.Oficina;
 import org.example.service.Service;
-
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
 public class OficinaServiceImpl implements Service<Oficina> {
 
-    private final Dao dao = PessoaDaoFactory.create();
+    private final Dao dao = OficinaDaoFactory.create();
 
     @Override
     public Oficina create(Oficina oficina) throws UnsupportedServiceOperationException, SQLException, NotSavedException {

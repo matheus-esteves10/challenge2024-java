@@ -34,6 +34,15 @@ public class Veiculo extends Pessoa {
         this.idPessoa = idPessoa;
     }
 
+    public Veiculo(Long id, String marca, String ano, String modelo, String documentoVeiculo, String placaVeiculo) {
+        this.id = id;
+        this.marca = marca;
+        this.ano = ano;
+        this.modelo = modelo;
+        this.documentoVeiculo = documentoVeiculo;
+        this.placaVeiculo = placaVeiculo;
+    }
+
     public Long getIdPessoa() {
         return idPessoa;
     }

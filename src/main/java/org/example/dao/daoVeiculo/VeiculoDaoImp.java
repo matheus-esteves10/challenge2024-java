@@ -24,7 +24,7 @@ public class VeiculoDaoImp implements Dao<Veiculo> {
 
     @Override
     public Veiculo save(Veiculo veiculo, Connection connection) throws SQLException, NotSavedException {
-        String sql = "INSERT INTO T_ATC_VEICULO (nm_marca, nm_modelo, nr_ano, nr_documento, nr_placa, id_usuario) VALUES (?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO T_ATC_VEICULO (nm_marca, nm_modelo, nr_ano, nr_documento, nr_placa, t_atc_usuario_id_usuario) VALUES (?, ?, ?, ?, ?, ?)";
 
         try (PreparedStatement stmt = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             // Definindo os parâmetros de entrada
@@ -61,9 +61,9 @@ public class VeiculoDaoImp implements Dao<Veiculo> {
     public List<Veiculo> readAll() {
         List<Veiculo> resultado = new ArrayList<>();
         final String sql = "SELECT * FROM t_atc_veiculo";
-        try (Connection connection = DatabaseConnectionFactory.create().get()) {
-            PreparedStatement stmt = connection.prepareStatement(sql);
-            ResultSet rs = stmt.executeQuery();
+        try (Connection connection = DatabaseConnectionFactory.create().get();
+             PreparedStatement stmt = connection.prepareStatement(sql);
+             ResultSet rs = stmt.executeQuery()) {
             while (rs.next()) {
                 Long id = rs.getLong("ID_VEICULO");
                 String marca = rs.getString("NM_MARCA");
@@ -71,7 +71,7 @@ public class VeiculoDaoImp implements Dao<Veiculo> {
                 String ano = rs.getString("NR_ANO");
                 String documento = rs.getString("Nr_DOCUMENTO");
                 String placa = rs.getString("NR_PLACA");
-                Long idPessoa = rs.getLong("ID_USUARIO");
+                Long idPessoa = rs.getLong("t_atc_usuario_id_usuario");
                 resultado.add(new Veiculo(id, marca, modelo, ano, documento, placa, idPessoa));
             }
         }catch (SQLException e){
@@ -82,7 +82,7 @@ public class VeiculoDaoImp implements Dao<Veiculo> {
 
     @Override
     public Veiculo readById(Long idPessoa) throws NotFoundException {
-        final String sql = "SELECT * FROM t_atc_veiculo WHERE id_usuario = ?";
+        final String sql = "SELECT * FROM t_atc_veiculo WHERE t_atc_usuario_id_usuario = ?";
 
         try (Connection connection = DatabaseConnectionFactory.create().get()) {
             PreparedStatement stmt = connection.prepareStatement(sql);
@@ -114,7 +114,7 @@ public class VeiculoDaoImp implements Dao<Veiculo> {
 
     @Override
     public Veiculo update(Veiculo veiculo, Connection connection) throws NotFoundException, SQLException {
-        final String sql = "UPDATE t_atc_veiculo SET nm_marca = ?, nm_modelo = ?, nr_ano = ?, nr_standard = ?, nr_placa = ? WHERE id_usuario = ?";
+        final String sql = "UPDATE t_atc_veiculo SET nm_marca = ?, nm_modelo = ?, nr_ano = ?, nr_documento = ?, nr_placa = ? WHERE t_atc_usuario_id_usuario = ?";
         PreparedStatement stmt = connection.prepareStatement(sql);
         stmt.setString(1, veiculo.getMarca());
         stmt.setString(2, veiculo.getModelo());
