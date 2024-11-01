@@ -24,37 +24,34 @@ public class VeiculoDaoImp implements Dao<Veiculo> {
 
     @Override
     public Veiculo save(Veiculo veiculo, Connection connection) throws SQLException, NotSavedException {
-        String sql = "INSERT INTO T_ATC_VEICULO (nm_marca, nm_modelo, nr_ano, nr_documento, nr_placa, t_atc_usuario_id_usuario) VALUES (?, ?, ?, ?, ?, ?)";
+        String sql = "BEGIN INSERT INTO T_ATC_VEICULO (nm_marca, nm_modelo, nr_ano, nr_documento, nr_placa, t_atc_usuario_id_usuario) VALUES (?, ?, ?, ?, ?, ?) RETURNING ID_VEICULO INTO ?; END;";
+        CallableStatement call = connection.prepareCall(sql);
 
-        try (PreparedStatement stmt = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
-            // Definindo os parâmetros de entrada
-            stmt.setString(1, veiculo.getMarca());
-            stmt.setString(2, veiculo.getModelo());
-            stmt.setString(3, veiculo.getAno());
-            stmt.setString(4, veiculo.getDocumentoVeiculo());
-            stmt.setString(5, veiculo.getPlacaVeiculo());
-            stmt.setLong(6, veiculo.getIdPessoa());
+        // Definindo os parâmetros de entrada (IN)
+        call.setString(1, veiculo.getMarca());
+        call.setString(2, veiculo.getModelo());
+        call.setString(3, veiculo.getAno());
+        call.setString(4, veiculo.getDocumentoVeiculo());
+        call.setString(5, veiculo.getPlacaVeiculo());
+        call.setLong(6, veiculo.getIdPessoa());
 
-            // Executando a inserção
-            int affectedRows = stmt.executeUpdate();
+        call.registerOutParameter(7, java.sql.Types.NUMERIC);
 
-            if (affectedRows == 0) {
-                throw new NotSavedException();
-            }
+        call.execute();
 
-            // Recuperando o ID gerado
-            try (ResultSet generatedKeys = stmt.getGeneratedKeys()) {
-                if (generatedKeys.next()) {
-                    long id = generatedKeys.getLong(1);
-                    veiculo.setId(id);
-                } else {
-                    throw new NotSavedException();
-                }
-            }
+        // Recuperando o ID gerado
+        long id = call.getLong(7);
+
+        if (id == 0) {
+            throw new NotSavedException();
         }
+
+
+        veiculo.setId(id);
 
         return veiculo;
     }
+
 
 
     @Override
