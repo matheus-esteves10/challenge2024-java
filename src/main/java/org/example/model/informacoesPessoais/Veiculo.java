@@ -24,21 +24,21 @@ public class Veiculo extends Pessoa {
 
     }
 
-    public Veiculo(Long id, String marca, String ano, String modelo, String documentoVeiculo, String placaVeiculo, Long idPessoa) {
+    public Veiculo(Long id, String marca, String modelo, String ano, String documentoVeiculo, String placaVeiculo, Long idPessoa) {
         this.id = id;
         this.marca = marca;
-        this.ano = ano;
         this.modelo = modelo;
+        this.ano = ano;
         this.documentoVeiculo = documentoVeiculo;
         this.placaVeiculo = placaVeiculo;
         this.idPessoa = idPessoa;
     }
 
-    public Veiculo(Long id, String marca, String ano, String modelo, String documentoVeiculo, String placaVeiculo) {
+    public Veiculo(Long id, String marca, String modelo, String ano, String documentoVeiculo, String placaVeiculo) {
         this.id = id;
         this.marca = marca;
-        this.ano = ano;
         this.modelo = modelo;
+        this.ano = ano;
         this.documentoVeiculo = documentoVeiculo;
         this.placaVeiculo = placaVeiculo;
     }

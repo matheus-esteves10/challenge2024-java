@@ -8,6 +8,7 @@ import org.example.exceptions.UnsupportedServiceOperationException;
 import org.example.model.informacoesPessoais.Pessoa;
 import org.example.model.informacoesPessoais.Veiculo;
 import org.example.service.Service;
+import org.example.service.veiculo.VeiculoService;
 import org.example.service.veiculo.VeiculoServiceFactory;
 
 import javax.ws.rs.*;
@@ -19,7 +20,7 @@ import java.util.Map;
 @Path("/veiculo")
 public class VeiculoController {
 
-    private final Service<Veiculo> veiculoService = VeiculoServiceFactory.create();
+    private final VeiculoService veiculoService = VeiculoServiceFactory.create();
 
     @POST
     @Path("")
@@ -49,7 +50,7 @@ public class VeiculoController {
     }
 
     @GET
-    @Path("/all")
+    @Path("")
     @Produces(MediaType.APPLICATION_JSON)
     public Response findAll() {
         return Response.status(Response.Status.OK)

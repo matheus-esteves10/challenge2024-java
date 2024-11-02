@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
-public class VeiculoDaoImp implements Dao<Veiculo> {
+public class VeiculoDaoImp implements DaoVeiculo {
 
     private final Logger logger = Logger.getLogger(this.getClass().getName());
 
@@ -78,8 +78,9 @@ public class VeiculoDaoImp implements Dao<Veiculo> {
     }
 
     @Override
-    public Veiculo readById(Long idPessoa) throws NotFoundException {
+    public List<Veiculo> readById(Long idPessoa) throws NotFoundException {
         final String sql = "SELECT * FROM t_atc_veiculo WHERE t_atc_usuario_id_usuario = ?";
+        List<Veiculo> veiculos = new ArrayList<>();
 
         try (Connection connection = DatabaseConnectionFactory.create().get()) {
             PreparedStatement stmt = connection.prepareStatement(sql);
@@ -87,7 +88,7 @@ public class VeiculoDaoImp implements Dao<Veiculo> {
 
             ResultSet rs = stmt.executeQuery();
 
-            if (rs.next()) {
+            while (rs.next()) {
                 Long id = rs.getLong("ID_VEICULO");
                 String marca = rs.getString("NM_MARCA");
                 String modelo = rs.getString("NM_MODELO");
@@ -95,18 +96,20 @@ public class VeiculoDaoImp implements Dao<Veiculo> {
                 String documento = rs.getString("NR_DOCUMENTO");
                 String placa = rs.getString("NR_PLACA");
 
-
-                // Retorna o veículo encontrado
-                return new Veiculo(id, marca, modelo, ano, documento, placa, idPessoa);
-            } else {
-                // Caso não encontre o veículo, lança exceção
+                veiculos.add(new Veiculo(id, marca, modelo, ano, documento, placa, idPessoa));
+            }
+            if (veiculos.isEmpty()) {
                 throw new NotFoundException();
             }
+
+            return veiculos;
+
         } catch (SQLException e) {
-            logger.warning("Erro ao buscar veículo pelo ID: " + e.getMessage());
-            throw new RuntimeException("Erro ao buscar veículo pelo ID", e);
+            logger.warning("Erro ao buscar veículos pelo ID da pessoa: " + e.getMessage());
+            throw new RuntimeException("Erro ao buscar veículos pelo ID da pessoa", e);
         }
     }
+
 
 
     @Override

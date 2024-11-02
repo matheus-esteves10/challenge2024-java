@@ -6,7 +6,7 @@ public class VeiculoServiceFactory {
     private VeiculoServiceFactory() {
     }
 
-    public static Service create() {
+    public static VeiculoService create() {
         return new VeiculoServiceImpl();
     }
 }

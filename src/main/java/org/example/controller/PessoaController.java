@@ -46,7 +46,7 @@ public class PessoaController {
     }
 
     @GET
-    @Path("/all")
+    @Path("")
     @Produces(MediaType.APPLICATION_JSON)
     public Response findAll() {
         return Response.status(Response.Status.OK)

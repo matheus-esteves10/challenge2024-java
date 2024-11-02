@@ -8,10 +8,9 @@ import org.example.model.informacoesPessoais.Veiculo;
 public class VeiculoDaoFactory {
 
     private VeiculoDaoFactory() {
-        // Construtor privado para evitar instanciação
     }
 
-    public static Dao<Veiculo> create() {
+    public static DaoVeiculo create() {
         return new VeiculoDaoImp();
     }
 }

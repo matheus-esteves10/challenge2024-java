@@ -3,6 +3,7 @@ package org.example.service.veiculo;
 import org.example.config.DatabaseConnectionFactory;
 import org.example.dao.Dao;
 import org.example.dao.daoPessoa.PessoaDaoFactory;
+import org.example.dao.daoVeiculo.DaoVeiculo;
 import org.example.dao.daoVeiculo.VeiculoDaoFactory;
 import org.example.exceptions.NotFoundException;
 import org.example.exceptions.NotSavedException;
@@ -14,9 +15,9 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
-public class VeiculoServiceImpl implements Service<Veiculo> {
+public class VeiculoServiceImpl implements VeiculoService {
 
-    private final Dao dao = VeiculoDaoFactory.create();
+    private final DaoVeiculo dao = VeiculoDaoFactory.create();
 
 
     @Override
@@ -42,8 +43,8 @@ public class VeiculoServiceImpl implements Service<Veiculo> {
     }
 
     @Override
-    public Veiculo findById(Long id) throws NotFoundException {
-        return (Veiculo) this.dao.readById(id);
+    public List<Veiculo> findById(Long id) throws NotFoundException {
+        return this.dao.readById(id);
     }
 
     @Override
