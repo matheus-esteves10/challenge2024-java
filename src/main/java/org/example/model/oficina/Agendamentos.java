@@ -4,17 +4,29 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Date;
 
-public class Agendamentos extends Oficina {
-    private Oficina oficina;
+public class Agendamentos {
+    private Long id;
     private LocalDate dataAgendamento;
     private LocalTime horaDoAgendamento;
     private String descricaoServico;
+    private Long idOficina;
+    private Long idPessoa;
 
+    public Agendamentos(Long id, LocalDate dataAgendamento, LocalTime horaDoAgendamento, String descricaoServico, Long idOficina, Long idPessoa) {
+        this.id = id;
+        this.dataAgendamento = dataAgendamento;
+        this.horaDoAgendamento = horaDoAgendamento;
+        this.descricaoServico = descricaoServico;
+        this.idOficina = idOficina;
+        this.idPessoa = idPessoa;
+    }
 
+    public Long getId() {
+        return id;
+    }
 
-
-    public Agendamentos(Long id, String nomeOficina, String cidadeOficina, String enderecoOficina, String cnpjOficina) {
-        super(id, nomeOficina, cidadeOficina, enderecoOficina, cnpjOficina);
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public LocalDate getDataAgendamento() {
@@ -41,15 +53,20 @@ public class Agendamentos extends Oficina {
         this.descricaoServico = descricaoServico;
     }
 
-    public boolean isHorarioDisponivel() { //metodo para ver se o horario esta disponivel no banco de dados
-        //
-        return false;
+    public Long getIdOficina() {
+        return idOficina;
     }
 
-    public boolean isPecaDisponivel(){ //metodo para ver se a peça está disponível no estoque (banco de dados)
-        //
-        return false;
+    public void setIdOficina(Long idOficina) {
+        this.idOficina = idOficina;
     }
 
+    public Long getIdPessoa() {
+        return idPessoa;
+    }
+
+    public void setIdPessoa(Long idPessoa) {
+        this.idPessoa = idPessoa;
+    }
 
 }

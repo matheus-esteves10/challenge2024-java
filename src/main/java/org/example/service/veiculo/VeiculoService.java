@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 public interface VeiculoService {
+
     Veiculo create(Veiculo entity) throws UnsupportedServiceOperationException, SQLException, NotSavedException;
 
     List<Veiculo> findAll();
