@@ -22,50 +22,33 @@ public class LoginDaoImpl implements LoginDao{
     }
 
 
-    public List<Pessoa> checkLogin(String email, String cpf, String senha) {
+    @Override
+    public List<Pessoa> checkLogin(String login, String senha) {
         List<Pessoa> resultado = new ArrayList<>();
-        StringBuilder sql = new StringBuilder("SELECT * FROM t_atc_usuario WHERE ");
-        boolean hasEmail = email != null;
-        boolean hasCpf = cpf != null;
-
-        if (hasEmail) {
-            sql.append("NM_EMAIL = ?");
-        }
-        if (hasCpf) {
-            if (hasEmail) {
-                sql.append(" OR ");
-            }
-            sql.append("NR_CPF = ?");
-        }
-        sql.append(" AND NM_SENHA = ?");
-
+        final String sql = "SELECT * FROM t_atc_usuario WHERE NM_EMAIL = ?  AND NM_SENHA = ?";
         try (Connection connection = DatabaseConnectionFactory.create().get()) {
-            PreparedStatement stmt = connection.prepareStatement(sql.toString());
-            int index = 1;
+            PreparedStatement stmt = connection.prepareStatement(sql);
 
-            if (hasEmail) {
-                stmt.setString(index++, email);
-            }
-            if (hasCpf) {
-                stmt.setString(index++, cpf);
-            }
-            stmt.setString(index, senha);
+            // Definindo os parâmetros
+            stmt.setString(1, login);
+            stmt.setString(2, senha);
 
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
                 Long id = rs.getLong("ID_USUARIO");
                 String nome = rs.getString("NM_USUARIO");
                 LocalDate dataNasc = rs.getDate("DT_NASC").toLocalDate();
-                String cpfDb = rs.getString("NR_CPF");
-                String emailDb = rs.getString("NM_EMAIL");
+                String cpf = rs.getString("NR_CPF");
+                String email = rs.getString("NM_EMAIL");
                 String senhaDb = rs.getString("NM_SENHA");
-                resultado.add(new Pessoa(id, nome, dataNasc, cpfDb, emailDb, senhaDb));
+                resultado.add(new Pessoa(id, nome, dataNasc, cpf, email, senhaDb));
             }
-        } catch (SQLException e) {
+        } catch(SQLException e) {
             logger.warning("Não foi possível localizar nenhum registro de pessoa: " + e.getMessage());
         }
         return resultado;
     }
+
 
 
 }
