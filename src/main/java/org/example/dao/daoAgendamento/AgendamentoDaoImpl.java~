@@ -64,7 +64,7 @@ public class AgendamentoDaoImpl implements DaoAgendamento{
                 LocalTime horaDoAgendamento = rs.getTime("HORA_AGENDAMENTO").toLocalTime();
                 String descricaoServico = rs.getString("DS_SERVICO");
                 Long idUsuario = rs.getLong("T_ATC_USUARIO_ID_USUARIO");
-                Long idOficina = rs.getLong("T_ATC_OFICINA_ID_OFICINA");
+                Long idOficina = rs.getLong("ID_OFICINA");
                 resultado.add(new Agendamentos(id, dataAgendamento, horaDoAgendamento, descricaoServico, idUsuario, idOficina));
             }
         } catch (SQLException e) {
@@ -76,7 +76,7 @@ public class AgendamentoDaoImpl implements DaoAgendamento{
 
     @Override
     public List<Agendamentos> readByIdPessoa(Long idUsuario) throws NotFoundException {
-        final String sql = "SELECT * FROM t_atc_agendamento WHERE T_ATC_USUARIO_ID_USUARIO = ?";
+        final String sql = "SELECT * FROM t_atc_agendamento WHERE id_usuario = ?";
         List<Agendamentos> agendamentos = new ArrayList<>();
 
         try (Connection connection = DatabaseConnectionFactory.create().get();
@@ -89,7 +89,7 @@ public class AgendamentoDaoImpl implements DaoAgendamento{
                 LocalDate dataAgendamento = rs.getDate("DT_AGENDAMENTO").toLocalDate();
                 LocalTime horaDoAgendamento = rs.getTime("HORA_AGENDAMENTO").toLocalTime();
                 String descricaoServico = rs.getString("DS_SERVICO");
-                Long idOficina = rs.getLong("T_ATC_OFICINA_ID_OFICINA");
+                Long idOficina = rs.getLong("ID_OFICINA");
 
                 agendamentos.add(new Agendamentos(id, dataAgendamento, horaDoAgendamento, descricaoServico, idUsuario, idOficina));
             }
@@ -107,7 +107,7 @@ public class AgendamentoDaoImpl implements DaoAgendamento{
 
     @Override
     public List<Agendamentos> readByIdOficina(Long idOficina) throws NotFoundException {
-        final String sql = "SELECT * FROM t_atc_agendamento WHERE T_ATC_OFICINA_ID_OFICINA = ?";
+        final String sql = "SELECT * FROM t_atc_agendamento WHERE id_oficina = ?";
         List<Agendamentos> agendamentos = new ArrayList<>();
 
         try (Connection connection = DatabaseConnectionFactory.create().get();
@@ -120,7 +120,7 @@ public class AgendamentoDaoImpl implements DaoAgendamento{
                 LocalDate dataAgendamento = rs.getDate("DT_AGENDAMENTO").toLocalDate();
                 LocalTime horaDoAgendamento = rs.getTime("HORA_AGENDAMENTO").toLocalTime();
                 String descricaoServico = rs.getString("DS_SERVICO");
-                Long idUsuario = rs.getLong("T_ATC_USUARIO_ID_USUARIO");
+                Long idUsuario = rs.getLong("ID_USUARIO");
 
                 agendamentos.add(new Agendamentos(id, dataAgendamento, horaDoAgendamento, descricaoServico, idUsuario, idOficina));
             }
