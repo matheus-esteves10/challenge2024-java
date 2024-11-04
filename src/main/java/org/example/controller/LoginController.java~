@@ -22,7 +22,7 @@ public class LoginController {
     public Response checkUser(@PathParam("login") String login, @PathParam("senha") String senha){
         try {
             if (loginService.checkLogin(login, senha).isEmpty()) {
-                return Response.status(Response.Status.NOT_FOUND).entity(Map.of("mensagem", "Login ou senha incorretos")).build();
+                return Response.status(Response.Status.NOT_FOUND).entity(Map.of()).build();
             }
 
             return Response.status(Response.Status.OK)

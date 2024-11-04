@@ -32,6 +32,8 @@ public class LoginDaoImpl implements LoginDao{
             // Definindo os parâmetros
             stmt.setString(1, login);
             stmt.setString(2, senha);
+            stmt.setString(3, login);
+            stmt.setString(4, senha);
 
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
