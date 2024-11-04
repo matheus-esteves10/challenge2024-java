@@ -25,7 +25,7 @@ public class LoginDaoImpl implements LoginDao{
     @Override
     public List<Pessoa> checkLogin(String login, String senha) {
         List<Pessoa> resultado = new ArrayList<>();
-        final String sql = "SELECT * FROM t_atc_usuario WHERE NM_EMAIL = ?  AND NM_SENHA = ?";
+        final String sql = "SELECT * FROM t_atc_usuario WHERE (NM_EMAIL = ?  AND NM_SENHA = ?) OR (NR_CPF = ? AND NM_SENHA = ?)";
         try (Connection connection = DatabaseConnectionFactory.create().get()) {
             PreparedStatement stmt = connection.prepareStatement(sql);
 
