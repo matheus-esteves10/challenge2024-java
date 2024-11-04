@@ -121,7 +121,7 @@ public class VeiculoDaoImp implements DaoVeiculo {
         stmt.setString(3, veiculo.getAno());
         stmt.setString(4, veiculo.getDocumentoVeiculo());
         stmt.setString(5, veiculo.getPlacaVeiculo());
-        stmt.setLong(6, veiculo.getId());
+        stmt.setLong(6, veiculo.getIdPessoa());
         int linhasAlteradas = stmt.executeUpdate();
         if(linhasAlteradas == 0 ) {
             throw new NotFoundException();
